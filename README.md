@@ -24,7 +24,12 @@ stuff about class
 # Development and Testing Roadmap
 1. Classes
 	1. UserInput
-	1. more stuff 
-1. stuff
+	2. Symbols
+	3. Line
+	4. Semicolon
+	5. DoubleSlash
+	6. DoubleAnd
+	7. s 
+2. Testing
 
 
