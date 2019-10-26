@@ -12,17 +12,22 @@ Kosuke Kurita 862011998
 # Diagram
 **stuff**
 
-In order to add an image you must put it in the "images/" direi
-
-#Classes
-
-#Development and Testing Roadmap
-
-1.stuff
-
-1.stuff
-
-	1.stuff
+![inheritanceTree](https://github.com/cs100/assignment-team_robert_kosuke/blob/rwyat002/rstarter/images/inheritancetree.png)
 
 
+# Classes
+**New-class**: 
 
+stuff about class
+
+
+# Development and Testing Roadmap
+1. Classes
+	1. UserInput
+	2. Symbols
+	3. Line
+	4. Semicolon
+	5. DoubleSlash
+	6. DoubleAnd
+	7. s 
+2. Testing
