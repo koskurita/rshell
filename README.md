@@ -20,6 +20,12 @@ Kosuke Kurita 862011998
 
 stuff about class
 
+# Prototypes/Research
+**fork()**
+
+**waitpid()**
+
+**execvp()**
 
 # Development and Testing Roadmap
 1. Classes
