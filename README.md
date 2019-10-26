@@ -13,8 +13,8 @@ Kosuke Kurita 862011998
 # Diagram
 **stuff**
 
-In order to add an image you must put it in the "images/" directory
-image format:   "![Alt text](url)"
+
+![inheritanceTree](/assignment-team_robert_kosuke/images/inheritancetree.png)
 
 # Classes
 **New-class**: 
