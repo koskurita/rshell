@@ -12,7 +12,7 @@ Kosuke Kurita 862011998
 # Diagram
 **stuff**
 
-![inheritanceTree](https://github.com/cs100/assignment-team_robert_kosuke/blob/rwyat002/rstarter/images/inheritancetree.png)
+![inheritanceTree](https://github.com/cs100/assignment-team_robert_kosuke/blob/master/images/inheritancetree.png)
 
 
 # Classes
