@@ -14,7 +14,7 @@ Kosuke Kurita 862011998
 **stuff**
 
 
-![inheritanceTree](/assignment-team_robert_kosuke/images/inheritancetree.png)
+![inheritanceTree](https://github.com/cs100/assignment-team_robert_kosuke/blob/rwyat002/rstarter/images/inheritancetree.png)
 
 # Classes
 **New-class**: 
