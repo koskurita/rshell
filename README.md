@@ -16,6 +16,7 @@ Kosuke Kurita 862011998
 
 ![inheritanceTree](https://github.com/cs100/assignment-team_robert_kosuke/blob/rwyat002/rstarter/images/inheritancetree.png)
 
+
 # Classes
 **New-class**: 
 
@@ -31,5 +32,6 @@ stuff about class
 	6. DoubleAnd
 	7. s 
 2. Testing
+
 
 
