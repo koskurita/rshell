@@ -35,5 +35,16 @@ stuff about class
 	4. Semicolon
 	5. DoubleSlash
 	6. DoubleAnd
-	7. s 
-2. Testing
+	7. ExecutableCommand 
+2. Unit Testing
+	1. UserInput
+	2. Symbols
+	3. Line
+	4. Semicolon
+	5. DoubleSlash
+	6. DoubleAnd
+	7. ExecutableCommand
+3. Integration Test
+	1. Test Semicolon with DoubleSlash
+	2. Test Semicolon with DoubleAnd
+	3. Test DoubleSlash with DoubleAnd
