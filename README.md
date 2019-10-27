@@ -8,10 +8,7 @@ Kosuke Kurita 862011998
 **stuff**
 
 # Diagram
-**stuff**
-In order to add an image you must put it in the "images/" directory
-
-image format:   "![Alt text](url)"
+![inheritanceTree](https://github.com/cs100/assignment-team_robert_kosuke/blob/master/images/inheritancetree.png)
 
 # Classes
 **Userinput**
@@ -30,12 +27,22 @@ image format:   "![Alt text](url)"
 **ExecutableCommands**
 	Executable commands are vector of strings that store the commands that are going to be run on the terminal.
 
-#Development and Testing Roadmap
-1.stuff
 
-1.stuff
+# Prototypes/Research
+**fork()**
 
-        1.stuff
+**waitpid()**
 
+**execvp()**
 
+# Development and Testing Roadmap
+1. Classes
+	1. UserInput
+	2. Symbols
+	3. Line
+	4. Semicolon
+	5. DoubleSlash
+	6. DoubleAnd
+	7. s 
+2. Testing
 
