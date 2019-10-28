@@ -17,15 +17,11 @@ of classes called ExecutableCommand and Symbols, where Symbols are ";", "&&", an
 ExecutableCommands are everything else.
 
 # Diagram
-**stuff**
 
 ![inheritanceTree](https://github.com/cs100/assignment-team_robert_kosuke/blob/master/images/inheritancetree.png)
 
 
 # Classes
-**New-class**: 
-
-stuff about class
 
 # Prototypes/Research
 **fork()**
