@@ -7,7 +7,14 @@ Robert Wyatt 862134626
 Kosuke Kurita 862011998
 
 # Introduction
-**stuff**
+
+This program will be able to get an input from the user and split that input into
+classes that will determine which commands should and shouldn't be run. We use a composite
+pattern that has UserInputs at the top and a Line class that has a vector of UserInputs.
+The Line class is in charge of taking in the inputs and putting it into it's vector and it 
+is in charge of actually running the inputs. Line stores values in two different types
+of classes called ExecutableCommand and Symbols, where Symbols are ";", "&&", and "||" and 
+ExecutableCommands are everything else.
 
 # Diagram
 **stuff**
