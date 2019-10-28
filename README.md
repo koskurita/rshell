@@ -30,22 +30,22 @@ stuff about class
 # Development and Testing Roadmap
 1. Classes
 	1. UserInput https://github.com/cs100/assignment-team_robert_kosuke/issues/5
-	2. Symbols
-	3. Line
-	4. Semicolon
-	5. DoubleSlash
-	6. DoubleAnd
-	7. ExecutableCommand 
+	2. Symbols https://github.com/cs100/assignment-team_robert_kosuke/issues/6
+	3. Line https://github.com/cs100/assignment-team_robert_kosuke/issues/7
+	4. Semicolon https://github.com/cs100/assignment-team_robert_kosuke/issues/8
+	5. DoubleSlash https://github.com/cs100/assignment-team_robert_kosuke/issues/9
+	6. DoubleAnd https://github.com/cs100/assignment-team_robert_kosuke/issues/10
+	7. ExecutableCommand https://github.com/cs100/assignment-team_robert_kosuke/issues/11
 2. Unit Testing
-	1. UserInput
-	2. Symbols
-	3. Line
-	4. Semicolon
-	5. DoubleSlash
-	6. DoubleAnd
-	7. ExecutableCommand
+	1. UserInput https://github.com/cs100/assignment-team_robert_kosuke/issues/12
+	2. Symbols https://github.com/cs100/assignment-team_robert_kosuke/issues/13
+	3. Line https://github.com/cs100/assignment-team_robert_kosuke/issues/14
+	4. Semicolon https://github.com/cs100/assignment-team_robert_kosuke/issues/15
+	5. DoubleSlash https://github.com/cs100/assignment-team_robert_kosuke/issues/16
+	6. DoubleAnd https://github.com/cs100/assignment-team_robert_kosuke/issues/17
+	7. ExecutableCommand https://github.com/cs100/assignment-team_robert_kosuke/issues/18
 3. Integration Testing
-	1. Semicolon with DoubleSlash
-	2. Semicolon with DoubleAnd
-	3. DoubleAnd with DoubleSlash
-	4. DoubleSlash with DoubleAnd
+	1. Semicolon with DoubleSlash https://github.com/cs100/assignment-team_robert_kosuke/issues/19
+	2. Semicolon with DoubleAnd https://github.com/cs100/assignment-team_robert_kosuke/issues/20
+	3. DoubleAnd with DoubleSlash https://github.com/cs100/assignment-team_robert_kosuke/issues/21
+	4. DoubleSlash with DoubleAnd https://github.com/cs100/assignment-team_robert_kosuke/issues/22
