@@ -50,6 +50,25 @@ ExecutableCommands are everything else.
 
 
 # Prototypes/Research
+
+**fork(),waitpid(),execvp research**
+
+By researching and testing we figured out that execvp will automatically return after used. To prevent this from bringing the program to a
+hault, fork is used to create a copy thread that will be closed. Waitpid is used to force the parrent to wait for the child to close. This
+is useful in the case of using execvp because we just created a thread for the purpose of closing it. 
+
+An important note is that execvp takes in char * * and char * parameters. Because of that we are forced to create new char * that must
+be deleted or create memory leaks. 
+
+Another important not is that the pid_t needed for waitpid and returned by all 3 functions is, for all intents and purposes, an int.
+
+Finally, there is the possibility that fork can become useful in the future if more intense functions are implemented in the future.
+fork is an easy way to create new threads so long as you are careful to close them. 
+
+
+
+
+
 **fork()**
 
 **waitpid()**
