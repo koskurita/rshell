@@ -31,7 +31,7 @@ class Line: public UserInput {
         void doInput(); // this executes using execvp
 };
 
-class ExecutableCommand: public UserInput {
+class ExecutableCommand: public UserInput { // USE CONST CHAR
     private:
         const char* command[50];
         int passOrFail = -1;
