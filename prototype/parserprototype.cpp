@@ -10,32 +10,47 @@
 
 
 class UserInput{
-
+    private:
+        int ID = 0;
+    public:
+        int ReadID(){return ID;}
+        virtual int ParseUserInput();
+        virtual void doInput();
+        virtual void SetPassOrFail(int oneOrZero);
+        virtual int ReturnPassOrFail();
+        virtual bool PerformNext(UserInput* one, UserInput* two);        
 };
 
 class Line: public UserInput {
     protected:
     private:
+        int ID = 2;
+    std::vector<UserInput*> Inputs;
     public:
         int ParseUserInput();
-        std::vector<UserInput*> Inputs;
+        void doInput(); // this executes using execvp
 };
 
 class ExecutableCommand: public UserInput {
     private:
-        const char** command = new const char*[50];
+        const char* command[50];
+        int passOrFail = -1;
+        int ID = 1;
     public:
-        ExecutableCommand(const char* word){
-            command = word;
+        void SetPassOrFail(int oneOrZero); // this function sets pass or fail to one or zero
+        int ReturnPassOrFail(){return this->passOrFail}; //Returns pass or fail integer
+        ExecutableCommand(const char* words[]){ // constructor
+            command = words;
         }
-
 };
 
 
 class Symbol: public UserInput {
     private:
         const char* symbol;
+        int ID = 100;
     public:
+        bool PerformNext(UserInput* one, UserInput* two);
         Symbol(const char* s){
             symbol = s;
         }
