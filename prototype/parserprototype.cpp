@@ -1,144 +1,156 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <bits/stdc++.h> 
 #include <queue>
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <bits/stdc++.h> 
 
-
+using namespace std;
 
 class UserInput{
     private:
-        int ID = 0;
+/*        int ID = 0;*/
     public:
-        int ReadID(){return ID;}
+/*        int ReadID(){return ID;}
         virtual int ParseUserInput();
         virtual void doInput();
         virtual void SetPassOrFail(int oneOrZero);
         virtual int ReturnPassOrFail();
-        virtual bool PerformNext(UserInput* one, UserInput* two);        
+        virtual bool PerformNext(UserInput* one, UserInput* two);  */      
 };
 
 class Line: public UserInput {
     protected:
     private:
-        int ID = 2;
-    std::vector<UserInput*> Inputs;
+/*        int ID = 2;*/
+
     public:
         int ParseUserInput();
-        void doInput(); // this executes using execvp
+        vector<UserInput*> Inputs;
+/*        void doInput(); // this executes using execvp*/
 };
 
 class ExecutableCommand: public UserInput { // USE CONST CHAR
     private:
-        const char* command[50];
-        int passOrFail = -1;
-        int ID = 1;
+        const char** command;
+/*        int passOrFail = -1;
+        int ID = 1;*/
     public:
-        void SetPassOrFail(int oneOrZero); // this function sets pass or fail to one or zero
-        int ReturnPassOrFail(){return this->passOrFail}; //Returns pass or fail integer
-        ExecutableCommand(const char* words[]){ // constructor
+/*        void SetPassOrFail(int oneOrZero); // this function sets pass or fail to one or zero
+        int ReturnPassOrFail(){return this->passOrFail}; //Returns pass or fail integer*/
+        ExecutableCommand(const char* words[50]){ // constructor
             command = words;
         }
 };
 
-
 class Symbol: public UserInput {
     private:
         const char* symbol;
-        int ID = 100;
+/*        int ID = 100;*/
     public:
-        bool PerformNext(UserInput* one, UserInput* two);
+/*        bool PerformNext(UserInput* one, UserInput* two);*/
         Symbol(const char* s){
             symbol = s;
         }
 };
 
 
-int main(){
-    std::cout << "Type command\n";
-    std::string line;
-    std::getline (std::cin, line);
+void ParseUserInput(string cheese){
     
-    int n = line.length();
-    char* charArray[n+1];
+    string s = "";
+    vector<string> temp_vector;
     
-    strcpy(charArray, line.c_str());
-    
-    Line *temp_2 = new Line;
-    int count = 0;
-    const char* s[] = new const char*;
-    std::vector<const char*> temp_vector;
-    
-    for(unsigned int i = 0; i < line.size(); i++){
-        if(line[i] == ' '){ 
+    for(unsigned int i = 0; i < cheese.size(); i++){
+        if(cheese[i] == ' '){
+            s += cheese[i];
             temp_vector.push_back(s);
-            s[0] = "\n";
+            s = "";
         }
-        else if(line[i] == '&'){
-            s = line[i];
+        else if(cheese[i] == '&'){
+            s = cheese[i];
             i++;
-            s += line[i];
+            s += cheese[i];
             temp_vector.push_back(s);
-            s[0] = "\n";
+            s = "";
             i++;
         }
-        else if(line[i] == '|'){
-            s = line[i];
+        else if(cheese[i] == '|'){
+            s = cheese[i];
             i++;
-            s += line[i];
+            s += cheese[i];
             temp_vector.push_back(s);
-            s[0] = "\n";
+            s = "";
             i++;
         }
-        else if(line[i] == ';'){
-            s = line[i];
+        else if(cheese[i] == ';'){
+            s = cheese[i];
             temp_vector.push_back(s);
-            s[0] = "\n";
+            s = "";
             i++;
         }
         else{
-        s+= line[i];
+        s+= cheese[i];
         }
     }
     temp_vector.push_back(s);
     
+    
     for(unsigned int i = 0; i < temp_vector.size(); i++){
         std::cout << temp_vector[i] << std::endl;
     }
-
     
 
-    
-    const char* executable_command;
-    const char* doubleAnd = "&&";
-    const char* ddoubleOr = "||";
-    const char* semicolon = ";";
-    
-    
-    
-    
+    vector<const char*> ggs;
     for(unsigned int i = 0; i < temp_vector.size(); i++){
-        std::cout << i << std::endl;
-        while(temp_vector[i] != doubleAnd && temp_vector[i] != ddoubleOr && temp_vector[i] != semicolon){
-            executable_command += temp_vector[i];
-            i++;
-            std::cout << "crashprogram" << std::endl;
-            if(i == temp_vector.size()){
-                 std::cout << "crashprogram1" << std::endl;
-                UserInput* new_executable_command = new ExecutableCommand(executable_command);
-                temp_2->Inputs.push_back(new_executable_command);
-                exit(1);
-            }
-        }
-        UserInput* new_executable_command = new ExecutableCommand(executable_command);
-        UserInput* new_symbol = new Symbol(temp_vector[i]);
-        temp_2->Inputs.push_back(new_executable_command);
-        temp_2->Inputs.push_back(new_symbol);
-        executable_command = "";
-        count++;
+        const char* charArray = temp_vector[i].c_str();
+        ggs.push_back(charArray);
     }
+    
+    for(unsigned int i = 0; i < ggs.size(); i++){
+        cout << ggs[i] << endl;
+    }
+    
+    const char* doubleAnd = "&&";
+    const char* doubleOr = "||";
+    const char* semicolon = ";";
+    Line *new_line = new Line;
+    
+    for(unsigned int i = 0; i < ggs.size(); i++){
+        const char* temp[50];
+            while(ggs[i] != doubleAnd && ggs[i] != doubleOr && ggs[i] != semicolon && i < ggs.size()){
+                int k = 0;
+                temp[k] = ggs[i];
+                i++;
+                k++;
+            }
+            if(i == ggs.size()){
+                UserInput* new_executable_command = new ExecutableCommand(temp);
+                new_line->Inputs.push_back(new_executable_command);
+                return;
+            }
+            else{
+                UserInput* new_executable_command = new ExecutableCommand(temp);
+                new_line->Inputs.push_back(new_executable_command);
+                UserInput* new_symbol = new Symbol(ggs[i]);
+                new_line->Inputs.push_back(new_symbol);
+            }
+    }
+    
+    return;
+}
+
+
+
+
+
+
+
+
+int main(){
+    ParseUserInput("ls -a; cd -m|| vim READDME.hpp");
     return 0;
 }
+
+
