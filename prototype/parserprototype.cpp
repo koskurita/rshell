@@ -213,8 +213,9 @@ void ParseUserInput(string cheese){
     
 
     vector<const char*> ggs;
+    const char* charArray;
     for(unsigned int i = 0; i < temp_vector.size(); i++){
-        const char* charArray = temp_vector[i].c_str();
+        charArray = temp_vector[i].c_str();
         ggs.push_back(charArray);
     }
     
@@ -226,11 +227,13 @@ void ParseUserInput(string cheese){
     const char* doubleOr = "||";
     const char* semicolon = ";";
     Line *new_line = new Line;
+    int k;
+    const char* temp[50];
     
     for(unsigned int i = 0; i < ggs.size(); i++){
-        const char* temp[50];
+	    temp.fill(NULL);
+	    k = 0;
             while(ggs[i] != doubleAnd && ggs[i] != doubleOr && ggs[i] != semicolon && i < ggs.size()){
-                int k = 0;
                 temp[k] = ggs[i];
                 i++;
                 k++;
