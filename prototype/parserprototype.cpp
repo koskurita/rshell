@@ -96,7 +96,7 @@ class Line: public UserInput {
 
 class ExecutableCommand: public UserInput { // USE CONST CHAR
     private:
-        const char** command;
+        const char** command;  //remove const
 /*        int passOrFail = -1;
         int ID = 1;*/
     public:
@@ -104,7 +104,12 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         int ReturnPassOrFail(){return this->passOrFail}; //Returns pass or fail integer*/
         ExecutableCommand(const char* words[50]){ // constructor
             command = words;
+		//here we convert from const char* to char*
         }
+	~ExecutableCommand(){
+		//free all elements of 'command' array here
+	}
+	
 };
 
 class Symbol: public UserInput {
