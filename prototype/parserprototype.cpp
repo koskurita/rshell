@@ -96,14 +96,16 @@ class Line: public UserInput {
 
 class ExecutableCommand: public UserInput { // USE CONST CHAR
     private:
-        const char** command;  //remove const
+        const char* command[50];  //remove const
 /*        int passOrFail = -1;
         int ID = 1;*/
     public:
 /*        void SetPassOrFail(int oneOrZero); // this function sets pass or fail to one or zero
         int ReturnPassOrFail(){return this->passOrFail}; //Returns pass or fail integer*/
         ExecutableCommand(const char* words[50]){ // constructor
-            command = words;
+            for(int i =0; i < 50;i++){
+                command[i] = words[i];
+            }
 		//here we convert from const char* to char*
         }
 	~ExecutableCommand(){
@@ -234,9 +236,10 @@ void ParseUserInput(string cheese){
     Line *new_line = new Line;
     int k;
     const char* temp[50];
-    
     for(unsigned int i = 0; i < ggs.size(); i++){
-	    temp.fill(NULL);
+	        for(int y =0; y < 50;y++){
+                temp[y] = NULL;
+            }
 	    k = 0;
             while(ggs[i] != doubleAnd && ggs[i] != doubleOr && ggs[i] != semicolon && i < ggs.size()){
                 temp[k] = ggs[i];
@@ -246,7 +249,7 @@ void ParseUserInput(string cheese){
             if(i == ggs.size()){
                 UserInput* new_executable_command = new ExecutableCommand(temp);
                 new_line->Inputs.push_back(new_executable_command);
-                return;
+                break;
             }
             else{
                 UserInput* new_executable_command = new ExecutableCommand(temp);
@@ -255,7 +258,6 @@ void ParseUserInput(string cheese){
                 new_line->Inputs.push_back(new_symbol);
             }
     }
-    
     return;
 }
 
