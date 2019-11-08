@@ -5,125 +5,134 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
-#include <bits/stdc++.h> 
+#include <stdlib.h>
+#include  <sys/types.h>
+#include <stdio.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
 
 using namespace std;
 class UserInput{
     private:
         int ID = 0;
-    	int passOrFail = -1;
+        int passOrFail = -1;
     public:
         int ReadID(){return ID;}
         virtual void ParseUserInput(string cheese);
         virtual void doInput();
         virtual void SetPassOrFail(int oneOrZero);
-        virtual int ReturnPassOrFail();
         virtual bool PerformNext(UserInput* one, UserInput* two);//returns true if the next command will execute, false if it will not
-	int returnID(){return ID;}
-	       
+        int returnID(){
+            return ID;
+        }
+        int returnPassOrFail(){
+            return passOrFail;
+        }
+    
 };
 
 class Line: public UserInput {
     private:
         int ID = 2;
-	vector<UserInput*> Inputs;
-	int passOrFail = -1;
+    vector<UserInput*> Inputs;
+    int passOrFail = -1;
     public:
-	Line(){//default constructor
-	ID = 2;
-	}
+    Line(){//default constructor
+    ID = 2;
+    }
 
-	~Line(){//This destructor should call the destructor of every element in the vector and then pop it. 
-	int lastElement = Inputs.size() - 1;
-	while (lastElement != -1){
-	Inputs[lastElement]->~Inputs[lastElement];
-	Inputs.pop_back();
-	lastElement--;
-	}
-	
-	
-	}
-	////IF we ever put a line in a line then this becomes useful
-	void SetPassOrFail(int oneOrZero){
-	this->passOrFail = oneOrZero;
-	}
-	int ReturnPassOrFail(){
-	return this->passOrFail;
-	}
-	/////
-	
-	
-	////DONT USE THESE
-	bool PerformNext(UserInput *one, UserInput*two){//do not use perform next on a line
-	std::cout << "do not use perform next on a line.";
-	return false;
-	}
-	////
+    ~Line(){//This destructor should call the destructor of every element in the vector and then pop it.
+    int lastElement = Inputs.size() - 1;
+    while (lastElement != -1){
+    delete Inputs[lastElement];
+    Inputs.pop_back(); // delete later 
+    lastElement--;
+    }
+    
+    
+    }
+    ////IF we ever put a line in a line then this becomes useful
+    void SetPassOrFail(int oneOrZero){
+    this->passOrFail = oneOrZero;
+    }
+    int ReturnPassOrFail(){
+    return this->passOrFail;
+    }
+    /////
+    
+    
+    ////DONT USE THESE
+    bool PerformNext(UserInput *one, UserInput*two){//do not use perform next on a line
+        
+        std::cout << "do not use perform next on a line.";
+        exit(0);
+    }
+    ////
 
-	
-        void ParseUserInput(std::string cheese);
+    
+    void ParseUserInput(std::string cheese);
 
-        void doInput(){
-	int IterInt = 0;
-	while(IterInt < Inputs.size())
-	if (Inputs[IterInt]->returnID() < 100)//might need to change sinse it is id
-	{
-	Inputs[IterInt]->doInput();//call do input on executable/line
-	IterInt++;
-	Inputs[IterInt]->PerformNext(Inputs[IterInt - 1],Inputs[IterInt + 1]);//call perform next on the symbol
-	}
-	else
-	{
-	IterInt++;//do nothing and skip one because this is a symbol
-	}
+    void doInput(){
+    unsigned int IterInt = 0;
+    while(IterInt < Inputs.size())
+    if (Inputs[IterInt]->returnID() < 100)
+    {
+    Inputs[IterInt]->doInput();//call do input on executable/line
+    IterInt++;
+    Inputs[IterInt]->PerformNext(Inputs[IterInt - 1],Inputs[IterInt + 1]);//call perform next on the symbol
+    }
+    else
+    {
+    IterInt++;//do nothing and skip one because this is a symbol
+    }
 }
 };
 
 class ExecutableCommand: public UserInput { // USE CONST CHAR
     private:
- 
-       char* command[50];  //remove const
+        char* command[50];  //remove const
         int passOrFail = -1;
         int ID = 1;
     public:
         void SetPassOrFail(int oneOrZero) // this function sets pass or fail to one or zero
-	{this->passOrFail = oneOrZero;}
+    {this->passOrFail = oneOrZero;}
         int ReturnPassOrFail(){return this->passOrFail;} //Returns pass or fail integer*/
 
-	
-	
-        ExecutableCommand(const char* words[50]){ // constructor
+    
+    
+    ExecutableCommand(const char* words[50]){ // constructor
         ID = 1;
-	
-	int iterInt = 0;
-	while(words[iterInt] != NULL){
-	command[iterInt] = strdup(words[iterInt]);
-	iterInt++;
-	}    
-	command[iterInt + 1] = NULL;
-	
+    
+    int iterInt = 0;
+    while(words[iterInt] != NULL){
+    command[iterInt] = strdup(words[iterInt]);
+    iterInt++;
+    }
+    command[iterInt + 1] = NULL;
+    
         }
 
 
-	~ExecutableCommand(){
-	int iterInt = 0;
-	while(command[iterInt] != NULL){
+    ~ExecutableCommand(){
+    int iterInt = 0;
+    while(command[iterInt] != NULL){
         free(command[iterInt]);
         iterInt++;
         }
-	}
-	
-	////DO NOT CALL THESE
-	void ParseUserInput(std::string cheese){//do not call
-	std::cout << "Error, do not call parseUserINput in executablecommand";}
-	bool PerformNext(UserInput * one, UserInput * two){
-	std::cout << "Error. do not call performNext in executablecommand.";
-	return false;
-	}
-	////
+    }
+    
+    ////DO NOT CALL THESE
+    void ParseUserInput(std::string cheese){//do not call
+    std::cout << "Error, do not call parseUserINput in executablecommand";}
+    bool PerformNext(UserInput * one, UserInput * two){
+    std::cout << "Error. do not call performNext in executablecommand.";
+    return false;
+    }
+    ////
 
-	void doInput(){//this is now neccessary
-	pid_t child;
+    void doInput(){//this is now neccessary
+    pid_t child;
         child = fork();
         if (child < 0){
         std::cout << "Massive error, fork failed." << endl;
@@ -142,47 +151,48 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         waitpid(-1,&child,0);
         }
 
-	}
-	
-	
+    }
+    
+    
 };
 
 class Symbol: public UserInput {
     private:
         const char* symbol;
         int ID = 100;
-	int passOrFail = -1;
+        int passOrFail = -1;
     public:
 
-        virtual bool PerformNext(UserInput* one, UserInput* two){
-	two->SetPassOrFail(1);//Might need to change
-	return true;
-	}
+    virtual bool PerformNext(UserInput* one, UserInput* two){
+    two->SetPassOrFail(1);
+    return true;
+    }
 
-        Symbol(const char* s){//default constructor
+    Symbol(const char* s){//default constructor
             symbol = s;
-	ID = 100;
+            ID = 100;
         }
 
-	void ParseUserInput(std::string cheese){//dont use this
+    void ParseUserInput(std::string cheese){//dont use this
         std::cout<< "Symbols dont call ParseUserInput"; return;}
 
         void doInput(){
         //do nothing}
 }
-        void SetPassOrFail(int oneOrZero){//dont use this
+            void SetPassOrFail(int oneOrZero){//dont use this
         std::cout<< "Symbols dont call oneOrZero";}
 
         int ReturnPassOrFail(){//dont use this
-	std::cout<< "Symbols dont call ReturnPassOrFail"; return 0;}
+    std::cout<< "Symbols dont call ReturnPassOrFail"; return 0;}
         
 };
 class DoubleAnd:public Symbol{
-private:
-	int passOrFail = -1;
-	int ID = 103;
-public:
-DoubleAnd(const char * s): Symbol(s){//default constructor
+    private:
+    const char* symbol;
+    int ID;
+    int passOrFail = -1;
+    
+DoubleAnd(const char * s):Symbol(s){//default constructor
 ID = 103;
 }
 bool PerformNext(UserInput * one, UserInput * two){
@@ -190,22 +200,23 @@ if (one->returnPassOrFail() == 1){
 //do nothing
 return true;
 }
-else 
+else
 two->SetPassOrFail(0);
 return false;
 }
 };
 
 class DoubleSlash:public Symbol{
-private: 
-	int passOrFail = -1;
-	int ID = 102;
-public:
-DoubleSlash(const char * s): Symbol(s){//default constructor
+    private:
+    const char* s;
+    int ID;
+    int passOrFail = -1;
+DoubleSlash(const char * s):Symbol(s){//default constructor
 ID = 102;
 }
+
 bool PerformNext(UserInput * one, UserInput * two){
-if (one->returnPassOrFail == 1){
+if (one->returnPassOrFail() == 1){
 two->SetPassOrFail(0);
 return false;
 }
@@ -216,15 +227,15 @@ return true;
 };
 
 class SemiColon: public Symbol{
-private:
-	int passOrFail = -1;
-	int ID = 101;
-public:
-SemiColon(const char * s): Symbol(s){//default constructor
+    private:
+    const char* s;
+    int ID;
+    int passOrFail = -1;
+SemiColon(const char* s):Symbol(s){//default constructor
 ID = 101;
 }
 bool PerformNext(UserInput * one, UserInput * two){
-if (one->returnPassOrFail == 1){
+if (one->returnPassOrFail() == 1){
 //do nothing
 return true;
 }
@@ -236,7 +247,7 @@ return true;
 };
 
 
-void ParseUserInput(string cheese){
+void Line::ParseUserInput(string cheese){
     string s = "";
     vector<string> temp_vector;
     for(unsigned int i = 0; i < cheese.size(); i++){
@@ -297,10 +308,10 @@ void ParseUserInput(string cheese){
     int k;
     const char* temp[50];
     for(unsigned int i = 0; i < ggs.size(); i++){
-	        for(int y =0; y < 50;y++){
+            for(int y =0; y < 50;y++){
                 temp[y] = NULL;
             }
-	    k = 0;
+        k = 0;
             while(ggs[i] != doubleAnd && ggs[i] != doubleOr && ggs[i] != semicolon && i < ggs.size()){
                 temp[k] = ggs[i];
                 i++;
@@ -332,5 +343,3 @@ int main(){
     ParseUserInput("ls -a; cd -m|| vim READDME.hpp");
     return 0;
 }
-
-
