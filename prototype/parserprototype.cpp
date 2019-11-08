@@ -10,22 +10,22 @@
 using namespace std;
 class UserInput{
     private:
-/*        int ID = 0;*/
-    	  int passOrFail = -1;
+        int ID = 0;
+    	int passOrFail = -1;
     public:
-/*        int ReadID(){return ID;}
-        virtual int ParseUserInput();
+        int ReadID(){return ID;}
+        virtual void ParseUserInput(string cheese);
         virtual void doInput();
         virtual void SetPassOrFail(int oneOrZero);
         virtual int ReturnPassOrFail();
-        virtual bool PerformNext(UserInput* one, UserInput* two);  */      
+        virtual bool PerformNext(UserInput* one, UserInput* two);//returns true if the next command will execute, false if it will not       
 };
 
 class Line: public UserInput {
-    protected:
     private:
-/*        int ID = 2;*/
-	vector <UserInput*> Inputs;
+        int ID = 2;
+	vector<UserInput*> Inputs;
+	int passOrFail = -1;
     public:
 	Line() = default;
 
@@ -39,8 +39,24 @@ class Line: public UserInput {
 	
 	
 	}
+	////IF we ever put a line in a line then this becomes useful
+	void SetPassOrFail(int oneOrZero){
+	this->passOrFail = oneOrZero;
+	}
+	int ReturnPassOrFail(){
+	return this->passOrFail;
+	}
+	/////
+	
+	
+	////DONT USE THESE
+	bool PerformNext(UserInput *one, UserInout*two){//do not use perform next on a line
+	std::cout << "do not use perform next on a line."
+	}
+	////
 
-        int ParseUserInput();
+	
+        void ParseUserInput(std::string cheese);
 
         void doInput(){
 	int IterInt = 0;
@@ -64,9 +80,12 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         int passOrFail = -1;
         int ID = 1;
     public:
-/*        void SetPassOrFail(int oneOrZero); // this function sets pass or fail to one or zero
-        int ReturnPassOrFail(){return this->passOrFail}; //Returns pass or fail integer*/
+        void SetPassOrFail(int oneOrZero) // this function sets pass or fail to one or zero
+	{this->passOrFail = oneOrZero;}
+        int ReturnPassOrFail(){return this->passOrFail;} //Returns pass or fail integer*/
 
+	
+	
         ExecutableCommand(const char* words[50]){ // constructor
         int iterInt = 0;
 	while(words[iterInt] != NULL){
@@ -85,6 +104,14 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         iterInt++;
         }
 	}
+	
+	////DO NOT CALL THESE
+	void ParseUserInput(std::string cheese){//do not call
+	std::cout << "Error, do not call parseUserINput in executablecommand";}
+	bool PerformNext(UserInput * one, UserInput * two){
+	std::cout << "Error. do not call performNext in executablecommand.";
+	}
+	////
 
 	void doInput(){//this is now neccessary
 	pid_t child;
@@ -114,21 +141,24 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 class Symbol: public UserInput {
     private:
         const char* symbol;
-/*        int ID = 100;*/
+        int ID = 100;
 	int passOrFail = -1;
     public:
 
-        bool virtual PerformNext(UserInput* one, UserInput* two){
+        virtual bool PerformNext(UserInput* one, UserInput* two){
 	two->passOrFail = 1;
+	return true;
 	}
+
         Symbol(const char* s){
             symbol = s;
         }
-	int ParseUserInput(){{//dont use this
+
+	void ParseUserInput(std::string cheese){{//dont use this
         std::cout<< "Symbols dont call ParseUserInput"; return 0;}
 }
-        void doInput(){{//dont use this
-        std::cout<< "Symbols dont call doInput";}
+        void doInput(){{
+        //do nothing}
 }
         void SetPassOrFail(int oneOrZero);{//dont use this
         std::cout<< "Symbols dont call oneOrZero";}
@@ -141,30 +171,35 @@ class DoubleAnd:public Symbol{
 bool PerformNext(UserInput * one, UserInput * two){
 if (one->PassOrFail == 1){
 //do nothing
+return true;
 }
 else 
 two->setPassOrFail(0);
+return false;
 }
 };
+
 class DoubleSlash:public Symbol{
 bool PerformNext(UserInput * one, UserInput * two){
 if (one->PassOrFail == 1){
 two->setPassOrFail(0);
+return false;
 }
 else
 //do nothing
+return true;
 }
-
-
-
 };
+
 class SemiColon: public Symbol{
 bool PerformNext(UserInput * one, UserInput * two){
 if (one->PassOrFail == 1){
 //do nothing
+return true;
 }
 else
 //do nothing
+return true;
 }
 
 };
