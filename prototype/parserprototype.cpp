@@ -9,7 +9,7 @@
 
 using namespace std;
 class UserInput{
-    protected:
+    private:
         int ID = 0;
     	int passOrFail = -1;
     public:
@@ -18,23 +18,25 @@ class UserInput{
         virtual void doInput();
         virtual void SetPassOrFail(int oneOrZero);
         virtual int ReturnPassOrFail();
-        virtual bool PerformNext(UserInput* one, UserInput* two);//returns true if the next command will execute, false if it will not       
+        virtual bool PerformNext(UserInput* one, UserInput* two);//returns true if the next command will execute, false if it will not
+	int returnID(){return ID;}
+	       
 };
 
 class Line: public UserInput {
     private:
-        //int ID = 2;
+        int ID = 2;
 	vector<UserInput*> Inputs;
-	//int passOrFail = -1;
+	int passOrFail = -1;
     public:
 	Line(){//default constructor
 	ID = 2;
 	}
 
 	~Line(){//This destructor should call the destructor of every element in the vector and then pop it. 
-	int lastElement = Input.size() - 1;
+	int lastElement = Inputs.size() - 1;
 	while (lastElement != -1){
-	Inputs->~Inputs[lastElement];
+	Inputs[lastElement]->~Inputs[lastElement];
 	Inputs.pop_back();
 	lastElement--;
 	}
@@ -53,7 +55,8 @@ class Line: public UserInput {
 	
 	////DONT USE THESE
 	bool PerformNext(UserInput *one, UserInput*two){//do not use perform next on a line
-	std::cout << "do not use perform next on a line."
+	std::cout << "do not use perform next on a line.";
+	return false;
 	}
 	////
 
@@ -63,11 +66,11 @@ class Line: public UserInput {
         void doInput(){
 	int IterInt = 0;
 	while(IterInt < Inputs.size())
-	if (Inputs[IterInt]->ID < 100)
+	if (Inputs[IterInt]->returnID() < 100)//might need to change sinse it is id
 	{
 	Inputs[IterInt]->doInput();//call do input on executable/line
 	IterInt++;
-	Inputs[InterInt]->PerformNext(Inputs[IterInt - 1],Inputs[IterInt + 1]);//call perform next on the symbol
+	Inputs[IterInt]->PerformNext(Inputs[IterInt - 1],Inputs[IterInt + 1]);//call perform next on the symbol
 	}
 	else
 	{
@@ -78,9 +81,10 @@ class Line: public UserInput {
 
 class ExecutableCommand: public UserInput { // USE CONST CHAR
     private:
-        char* command[50];  //remove const
- //       int passOrFail = -1;
-   //     int ID = 1;
+ 
+       char* command[50];  //remove const
+        int passOrFail = -1;
+        int ID = 1;
     public:
         void SetPassOrFail(int oneOrZero) // this function sets pass or fail to one or zero
 	{this->passOrFail = oneOrZero;}
@@ -96,15 +100,15 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 	command[iterInt] = strdup(words[iterInt]);
 	iterInt++;
 	}    
-	command[IterInt + 1] = NULL;
+	command[iterInt + 1] = NULL;
 	
         }
 
 
 	~ExecutableCommand(){
 	int iterInt = 0;
-	while(words[iterInt] != NULL){
-        free(words[iterInt]);
+	while(command[iterInt] != NULL){
+        free(command[iterInt]);
         iterInt++;
         }
 	}
@@ -114,6 +118,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 	std::cout << "Error, do not call parseUserINput in executablecommand";}
 	bool PerformNext(UserInput * one, UserInput * two){
 	std::cout << "Error. do not call performNext in executablecommand.";
+	return false;
 	}
 	////
 
@@ -145,12 +150,12 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 class Symbol: public UserInput {
     private:
         const char* symbol;
-        //int ID = 100;
-	//int passOrFail = -1;
+        int ID = 100;
+	int passOrFail = -1;
     public:
 
         virtual bool PerformNext(UserInput* one, UserInput* two){
-	two->passOrFail = 1;
+	two->SetPassOrFail(1);//Might need to change
 	return true;
 	}
 
@@ -159,13 +164,13 @@ class Symbol: public UserInput {
 	ID = 100;
         }
 
-	void ParseUserInput(std::string cheese){{//dont use this
-        std::cout<< "Symbols dont call ParseUserInput"; return 0;}
-}
-        void doInput(){{
+	void ParseUserInput(std::string cheese){//dont use this
+        std::cout<< "Symbols dont call ParseUserInput"; return;}
+
+        void doInput(){
         //do nothing}
 }
-        void SetPassOrFail(int oneOrZero);{//dont use this
+        void SetPassOrFail(int oneOrZero){//dont use this
         std::cout<< "Symbols dont call oneOrZero";}
 
         int ReturnPassOrFail(){//dont use this
@@ -173,27 +178,35 @@ class Symbol: public UserInput {
         
 };
 class DoubleAnd:public Symbol{
-DoubleAnd(){//default constructor
+private:
+	int passOrFail = -1;
+	int ID = 103;
+public:
+DoubleAnd(const char * s): Symbol(s){//default constructor
 ID = 103;
 }
 bool PerformNext(UserInput * one, UserInput * two){
-if (one->passOrFail == 1){
+if (one->returnPassOrFail() == 1){
 //do nothing
 return true;
 }
 else 
-two->setPassOrFail(0);
+two->SetPassOrFail(0);
 return false;
 }
 };
 
 class DoubleSlash:public Symbol{
-DoubleSlash(){//default constructor
+private: 
+	int passOrFail = -1;
+	int ID = 102;
+public:
+DoubleSlash(const char * s): Symbol(s){//default constructor
 ID = 102;
 }
 bool PerformNext(UserInput * one, UserInput * two){
-if (one->passOrFail == 1){
-two->setPassOrFail(0);
+if (one->returnPassOrFail == 1){
+two->SetPassOrFail(0);
 return false;
 }
 else
@@ -203,11 +216,15 @@ return true;
 };
 
 class SemiColon: public Symbol{
-SemiColon(){//default constructor
+private:
+	int passOrFail = -1;
+	int ID = 101;
+public:
+SemiColon(const char * s): Symbol(s){//default constructor
 ID = 101;
 }
 bool PerformNext(UserInput * one, UserInput * two){
-if (one->passOrFail == 1){
+if (one->returnPassOrFail == 1){
 //do nothing
 return true;
 }
