@@ -132,7 +132,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
     ////
 
     void doInput(){//this is now neccessary
-    pid_t child;
+    	pid_t child;
         child = fork();
         if (child < 0){
         std::cout << "Massive error, fork failed." << endl;
@@ -140,17 +140,20 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         else if (this->passOrFail == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
        
         }
-         else if (child == 0) {
-        if(execvp(command[0], command) < 0){  //this will be (*InputVector[i-1]->words, InputVector[i-1]->words)
-        cout << "failed to exe,delete this mssg later."; //delete this msg later
-        this->passOrFail = 0;      //signals that user input failed. Will be InputVector[i-1]->PassOrFail = 0;
+	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){
+	std::cout << "\n now exiting program \n";
+	exit(1);}
+        else if (child == 0) {
+        	if(execvp(command[0], command) < 0){  //this will be (*InputVector[i-1]->words, InputVector[i-1]->words)
+        	cout << "failed to exe,delete this mssg later."; //delete this msg later
+        	this->passOrFail = 0;      //signals that user input failed. Will be InputVector[i-1]->PassOrFail = 0;
+        	}
+        	}
+        	else{
+        	this->passOrFail = 1;      //Will be InputVector[i-1]->PassOrFail = 1;
+        	waitpid(-1,&child,0);
         }
-        }
-        else{
-        this->passOrFail = 1;      //Will be InputVector[i-1]->PassOrFail = 1;
-        waitpid(-1,&child,0);
-        }
-
+	}
     }
     
     
