@@ -105,7 +105,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         this->PassOrFail = 1;      //Will be InputVector[i-1]->PassOrFail = 1;
         waitpid(-1,&child,0);
         }
-	
+
 	}
 	
 	
@@ -166,7 +166,6 @@ if (one->PassOrFail == 1){
 else
 //do nothing
 }
-
 
 };
 
