@@ -8,7 +8,6 @@
 #include <bits/stdc++.h> 
 
 using namespace std;
-
 class UserInput{
     private:
 /*        int ID = 0;*/
