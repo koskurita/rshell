@@ -9,7 +9,7 @@
 
 using namespace std;
 class UserInput{
-    private:
+    protected:
         int ID = 0;
     	int passOrFail = -1;
     public:
@@ -23,11 +23,13 @@ class UserInput{
 
 class Line: public UserInput {
     private:
-        int ID = 2;
+        //int ID = 2;
 	vector<UserInput*> Inputs;
-	int passOrFail = -1;
+	//int passOrFail = -1;
     public:
-	Line() = default;
+	Line(){//default constructor
+	ID = 2;
+	}
 
 	~Line(){//This destructor should call the destructor of every element in the vector and then pop it. 
 	int lastElement = Input.size() - 1;
@@ -50,7 +52,7 @@ class Line: public UserInput {
 	
 	
 	////DONT USE THESE
-	bool PerformNext(UserInput *one, UserInout*two){//do not use perform next on a line
+	bool PerformNext(UserInput *one, UserInput*two){//do not use perform next on a line
 	std::cout << "do not use perform next on a line."
 	}
 	////
@@ -77,8 +79,8 @@ class Line: public UserInput {
 class ExecutableCommand: public UserInput { // USE CONST CHAR
     private:
         char* command[50];  //remove const
-        int passOrFail = -1;
-        int ID = 1;
+ //       int passOrFail = -1;
+   //     int ID = 1;
     public:
         void SetPassOrFail(int oneOrZero) // this function sets pass or fail to one or zero
 	{this->passOrFail = oneOrZero;}
@@ -87,7 +89,9 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 	
 	
         ExecutableCommand(const char* words[50]){ // constructor
-        int iterInt = 0;
+        ID = 1;
+	
+	int iterInt = 0;
 	while(words[iterInt] != NULL){
 	command[iterInt] = strdup(words[iterInt]);
 	iterInt++;
@@ -119,17 +123,17 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         if (child < 0){
         std::cout << "Massive error, fork failed." << endl;
         }
-        else if (this->PassOrFail == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
+        else if (this->passOrFail == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
        
         }
          else if (child == 0) {
         if(execvp(command[0], command) < 0){  //this will be (*InputVector[i-1]->words, InputVector[i-1]->words)
         cout << "failed to exe,delete this mssg later."; //delete this msg later
-        this->PassOrFail = 0;      //signals that user input failed. Will be InputVector[i-1]->PassOrFail = 0;
+        this->passOrFail = 0;      //signals that user input failed. Will be InputVector[i-1]->PassOrFail = 0;
         }
         }
         else{
-        this->PassOrFail = 1;      //Will be InputVector[i-1]->PassOrFail = 1;
+        this->passOrFail = 1;      //Will be InputVector[i-1]->PassOrFail = 1;
         waitpid(-1,&child,0);
         }
 
@@ -141,8 +145,8 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 class Symbol: public UserInput {
     private:
         const char* symbol;
-        int ID = 100;
-	int passOrFail = -1;
+        //int ID = 100;
+	//int passOrFail = -1;
     public:
 
         virtual bool PerformNext(UserInput* one, UserInput* two){
@@ -150,8 +154,9 @@ class Symbol: public UserInput {
 	return true;
 	}
 
-        Symbol(const char* s){
+        Symbol(const char* s){//default constructor
             symbol = s;
+	ID = 100;
         }
 
 	void ParseUserInput(std::string cheese){{//dont use this
@@ -168,8 +173,11 @@ class Symbol: public UserInput {
         
 };
 class DoubleAnd:public Symbol{
+DoubleAnd(){//default constructor
+ID = 103;
+}
 bool PerformNext(UserInput * one, UserInput * two){
-if (one->PassOrFail == 1){
+if (one->passOrFail == 1){
 //do nothing
 return true;
 }
@@ -180,8 +188,11 @@ return false;
 };
 
 class DoubleSlash:public Symbol{
+DoubleSlash(){//default constructor
+ID = 102;
+}
 bool PerformNext(UserInput * one, UserInput * two){
-if (one->PassOrFail == 1){
+if (one->passOrFail == 1){
 two->setPassOrFail(0);
 return false;
 }
@@ -192,8 +203,11 @@ return true;
 };
 
 class SemiColon: public Symbol{
+SemiColon(){//default constructor
+ID = 101;
+}
 bool PerformNext(UserInput * one, UserInput * two){
-if (one->PassOrFail == 1){
+if (one->passOrFail == 1){
 //do nothing
 return true;
 }
