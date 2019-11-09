@@ -5,7 +5,7 @@
 TEST(UserInputTest, TestSetPassOrFail) {
     UserInput * tester = new Line();
     tester->SetPassOrFail(1);
-    EXPECT_EQ(tester->returnPassOrFail, 1);
+    EXPECT_EQ(tester->returnPassOrFail(), 1);
     
 }
 
