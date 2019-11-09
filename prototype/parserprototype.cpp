@@ -194,7 +194,7 @@ class DoubleAnd:public Symbol{
     const char* symbol;
     int ID;
     int passOrFail = -1;
-    
+ public:   
 DoubleAnd(const char * s):Symbol(s){//default constructor
 ID = 103;
 }
@@ -214,6 +214,7 @@ class DoubleSlash:public Symbol{
     const char* s;
     int ID;
     int passOrFail = -1;
+public:
 DoubleSlash(const char * s):Symbol(s){//default constructor
 ID = 102;
 }
@@ -234,6 +235,7 @@ class SemiColon: public Symbol{
     const char* s;
     int ID;
     int passOrFail = -1;
+public:
 SemiColon(const char* s):Symbol(s){//default constructor
 ID = 101;
 }
