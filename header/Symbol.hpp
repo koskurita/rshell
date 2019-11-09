@@ -1,0 +1,31 @@
+#ifndef __SYMBOLL_H__
+#define __SYMBOL_H__
+
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <queue>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <stdlib.h>
+#include  <sys/types.h>
+#include <stdio.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+class Symbol: public UserInput {
+    private:
+        const char* symbol;
+        int ID = 100;
+        int passOrFail = -1;
+    public:
+        virtual bool PerformNext(UserInput* one, UserInput* two);
+        Symbol(const char* s);
+        void ParseUserInput(std::string cheese);
+        void doInput();
+        void SetPassOrFail(int oneOrZero);
+        int ReturnPassOrFail();
+};
+
+#endif /*__SYMBOL_H__*/
