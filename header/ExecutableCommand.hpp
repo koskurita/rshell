@@ -1,5 +1,5 @@
-#ifndef __EXECUTABLECOMMAND_H__
-#define __EXECUTABLECOMMAND_H__
+#ifndef __EXECUTABLECOMMAND_HPP__
+#define __EXECUTABLECOMMAND_HPP__
 
 #include <iostream>
 #include <sstream>

@@ -1,5 +1,5 @@
-#ifndef __DOUBLESLASH_H__
-#define __DOUBLESLASH_H__
+#ifndef __DOUBLESLASH_HPP__
+#define __DOUBLESLASH_HPP__
 
 #include <iostream>
 #include <sstream>

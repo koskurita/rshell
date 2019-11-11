@@ -1,5 +1,5 @@
-#ifndef __USERINPUT_H__
-#define __USERINPUT_H__
+#ifndef __USERINPUT_HPP__
+#define __USERINPUT_HPP__
 
 #include <iostream>
 #include <sstream>
