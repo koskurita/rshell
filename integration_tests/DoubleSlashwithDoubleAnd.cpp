@@ -103,7 +103,7 @@ class Line: public UserInput {
 
     }
 
-    //IF we ever put a line in a line then this becomes useful
+    /*IF we ever put a line in a line then this becomes useful*/
     
      void SetPassOrFail(int oneOrZero){
     
