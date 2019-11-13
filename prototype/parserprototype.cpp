@@ -138,19 +138,23 @@ UserInput* ParseUserInput(std::string cheese);
 
     void doInput(){
         cout << Inputs.size();
-        unsigned int IterInt = 1;
-        Inputs[0]->doInput();
+        unsigned int IterInt = 0; 
 
-        while(IterInt < Inputs.size()){
-            if (Inputs[IterInt]->returnID() < 100){
-                Inputs[IterInt]->doInput();//call do input on executable/line
-                Inputs[IterInt+1]->PerformNext(Inputs[IterInt],Inputs[IterInt + 2]);//call perform next on the symbol
-                IterInt++;
+        while(IterInt < Inputs.size()){//while iterInt < SizeOVec
+            if (Inputs[IterInt]->returnID() > 100){ //if Inputs[IterInt] = Symbol
+		if(IterInt != 0){
+                	Inputs[IterInt - 1]->doInput();//call doInput on ExecutableCommand Which exists prior to symbol
+                	Inputs[IterInt]->PerformNext(Inputs[IterInt-1],Inputs[IterInt + 1]);//call perform next on the symbol
+                	IterInt++;
+		  }//Example ls || -a ; ls
+	    	else {
+		cout << "Error, symbol(&&,||,;) is first element inputted." << endl;
+		exit(0);
+		}
             }
-
             else{
 
-                IterInt++;//do nothing and skip one because this is a symbol
+                IterInt++;//do nothing and skip one because this is a Executable command
             }
 
         }
@@ -233,46 +237,45 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
     }
 
- void doInput(){//this is now neccessary
+ void doInput(){
     	pid_t child;
 
-        child = fork();
+        child = fork();//create child fork
         
-        if (child < 0){
+        if (child < 0){//if child < 0 then there was a failure to fork
 
         std::cout << "Massive error, fork failed." << endl;
 
         }
-
         else if (this->passOrFail == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
-
-       
-
+		if(child == 0) {
+		exit(1);//this ends child
+		}
         }
-
-	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){
+	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){//this exits both child and parent if command[0] = exit
 
 	std::cout << "\n now exiting program \n";
 
-	exit(1);}
-
-        else if (child == 0) {
+	exit(1);
+	}
+        else if (child == 0) {//aka we are in child
         	if(execvp(command[0], command) < 0){  //this will be (*InputVector[i-1]->words, InputVector[i-1]->words)
 
-        	cout << "failed to exe,delete this mssg later."; //delete this msg later
+        	cout << endl << "failed to execute " << command[0] << endl; //we may want to delete this later
 
-        	this->passOrFail = 0;      //signals that user input failed. Will be InputVector[i-1]->PassOrFail = 0;
-
+        	this->passOrFail = 0;      //signals that user input failed. 
+		exit(1);
         	}
-
-        	}
-
         	else{
 
-        	this->passOrFail = 1;      //Will be InputVector[i-1]->PassOrFail = 1;
+        	this->passOrFail = 1;      
 
-        	waitpid(-1,&child,0);
+        	exit(1);
+		}
         }
+	else if(child > 0){ //aka we are in parent
+	waitpid(-1,&child,0);
+	}
  }
 };
 
