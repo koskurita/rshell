@@ -22,7 +22,7 @@ class Symbol: public UserInput {
     public:
         virtual bool PerformNext(UserInput* one, UserInput* two);
         Symbol(const char* s);
-        void ParseUserInput(std::string cheese);
+        UserInput* ParseUserInput(std::string cheese);
         void doInput();
         void SetPassOrFail(int oneOrZero);
         int ReturnPassOrFail();
