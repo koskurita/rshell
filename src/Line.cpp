@@ -63,7 +63,7 @@
   
     
 
-void Line::ParseUserInput(string cheese){
+UserInput* Line::ParseUserInput(string cheese){
     string s = "";
      vector<string> temp_vector;
     for(unsigned int i = 0; i < cheese.size(); i++){
