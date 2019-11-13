@@ -25,7 +25,7 @@ class Line: public UserInput {
     void SetPassOrFail(int oneOrZero){;
     int ReturnPassOrFail();
     bool PerformNext(UserInput *one, UserInput*two);
-    void ParseUserInput(std::string cheese);
+    UserInput* ParseUserInput(std::string cheese);
     void doInput();
 };
 
