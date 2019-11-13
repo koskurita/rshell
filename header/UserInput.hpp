@@ -20,7 +20,7 @@ class UserInput{
         int passOrFail = -1;
     public:
         int ReadID();
-        virtual void ParseUserInput(string cheese);
+        virtual UserInput* ParseUserInput(string cheese);
         virtual void doInput();
         virtual void SetPassOrFail(int oneOrZero);
         virtual bool PerformNext(UserInput* one, UserInput* two);
