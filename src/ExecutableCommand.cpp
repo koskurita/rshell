@@ -43,23 +43,32 @@
 
     void ExecutableCommand::doInput(){//this is now neccessary
         pid_t child;
-        child = fork();
-        if (child < 0){
-            std::cout << "Massive error, fork failed." << endl;
+        child = fork();//create child fork       
+        if (child < 0){//if child < 0 then there was a failure to fork
+        std::cout << "Massive error, fork failed." << endl;
         }
         else if (this->passOrFail == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
-       
+		if(child == 0) {
+		exit(1);//this ends child
+		}
         }
-        else if (child == 0) {
-            if(execvp(command[0], command) < 0){  //this will be (*InputVector[i-1]->words, InputVector[i-1]->words)
-                cout << "failed to exe,delete this mssg later."; //delete this msg later
-                this->passOrFail = 0;      //signals that user input failed. Will be InputVector[i-1]->PassOrFail = 0;
-            }
+	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){//this exits both child and parent if command[0] = exit
+	std::cout << "\n now exiting program \n";
+	exit(1);
+	}
+        else if (child == 0) {//aka we are in child
+        	if(execvp(command[0], command) < 0){  //this will be (*InputVector[i-1]->words, InputVector[i-1]->words)
+        	cout << endl << "failed to execute " << command[0] << endl; //we may want to delete this later
+        	this->passOrFail = 0;      //signals that user input failed. 
+		exit(1);
+        	}
+        	else{
+        	this->passOrFail = 1;      
+        	exit(1);
+		}
         }
-        else{
-            this->passOrFail = 1;      //Will be InputVector[i-1]->PassOrFail = 1;
-            waitpid(-1,&child,0);
-        }
-
+	else if(child > 0){ //aka we are in parent
+	waitpid(-1,&child,0);
+	}
     }
     
