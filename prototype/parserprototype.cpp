@@ -137,7 +137,6 @@ UserInput* ParseUserInput(std::string cheese);
 
 
     void doInput(){
-        cout << Inputs.size();
         unsigned int IterInt = 0; 
 
         while(IterInt < Inputs.size()){//while iterInt < SizeOVec
@@ -153,6 +152,11 @@ UserInput* ParseUserInput(std::string cheese);
 		}
             }
             else{
+		if(IterInt == Inputs.size() - 1){
+			if(Inputs[IterInt]->returnPassOrFail != 0)   //if the last executable command's passOrFail has not been set to fail...
+				if(Inputs[IterInt]->returnID() < 100)//and the last thing in the vector IS an executableCommand...
+					Inputs[IterInt]->doInput();  //run doInput.
+		}
 
                 IterInt++;//do nothing and skip one because this is a Executable command
             }
