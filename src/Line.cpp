@@ -33,20 +33,34 @@
     ////
 
     void Line::doInput(){
-        unsigned int IterInt = 0;
-        while(IterInt < Inputs.size()){
-            if (Inputs[IterInt]->returnID() < 100){
-                Inputs[IterInt]->doInput();//call do input on executable/line
-                IterInt++;
-                Inputs[IterInt]->PerformNext(Inputs[IterInt - 1],Inputs[IterInt + 1]);//call perform next on the symbol
+        unsigned int IterInt = 0; 
+
+        while(IterInt < Inputs.size()){//while iterInt < SizeOVec
+            if (Inputs[IterInt]->returnID() > 100){ //if Inputs[IterInt] = Symbol
+		if(IterInt != 0){
+                	Inputs[IterInt - 1]->doInput();//call doInput on ExecutableCommand Which exists prior to symbol
+                	Inputs[IterInt]->PerformNext(Inputs[IterInt-1],Inputs[IterInt + 1]);//call perform next on the symbol
+                	IterInt++;
+		  }//Example ls || -a ; ls
+	    	else {
+		cout << "Error, symbol(&&,||,;) is first element inputted." << endl;
+		exit(0);
+		}
             }
-            else
-            {
-            IterInt++;//do nothing and skip one because this is a symbol
+            else{
+		if(IterInt == Inputs.size() - 1){
+			if(Inputs[IterInt]->returnPassOrFail != 0)   //if the last executable command's passOrFail has not been set to fail...
+				if(Inputs[IterInt]->returnID() < 100)//and the last thing in the vector IS an executableCommand...
+					Inputs[IterInt]->doInput();  //run doInput.
+		}
+
+                IterInt++;//do nothing and skip one because this is a Executable command
             }
+
         }
-    }
     
+    }
+  
     
 
 void Line::ParseUserInput(string cheese){
