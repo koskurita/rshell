@@ -22,39 +22,50 @@ ExecutableCommands are everything else.
 
 **Userinput**
 
-	Userinput is the base class and  it takes the input from the user and assigns an ID for each line. The ID is use to determine whether the userinput is asymbol or an executable command.
+	Userinput is the base class and it takes the input from the user 
+	and assigns an ID for each line. The ID is use to determine whether 
+	the userinput is asymbol or an executable command.
 
 **Line**
 
-	Line is a vector of userinput which contains either symbols or executable_commands.
+	Line inherits from UserInput and contains a vector of userinput which  
+	currently contains either symbols or executable_commands.
 
 **Symbols**
 
-	Symbols are userinputs that are either ";", "||", or "&&" which all symbolize the endd of an executable command.
+	Symbols are userinputs that are either ";", "||", or "&&" 
+	which all symbolize the end of an executable command. We use Symbols
+	to determine if we should execute the next ExecutableCommand in our
+	Line using the function "PerformNext"
 
 **SemiColon**
 
-	The semicolon represents the end of an executable command.
+	The semicolon represents the end of an executable command. Whatever
+	Executable command comes after a semicolon will run.
 
 **DoubleSlash**
 
-	The "or" symbol runs the executable command which comes after it only if the command prior to the symbol fails to run successfully.
+	The "or" symbol runs the executable command which comes after 
+	it only if the command prior to the symbol fails to run successfully.
 
 **DoubleAnd**
 
-	The "and" symbol runs the executable command which comes after it only if the command prior to the symbol runs successfully.
+	The "and" symbol runs the executable command which comes 
+	after it only if the command prior to the symbol runs successfully.
 
 **ExecutableCommands**
 
-	Executable commands are vector of strings that store the commands that are going to be run on the terminal.
+	Executable commands are vector of char* that store the commands 
+	that are going to be run on the terminal. ExecutableCommands have
+	a parameter of const char* vec[50] which is converted into a
+	char* vec[50]
 
 
 # Prototypes/Research
 
 **fork(),waitpid(),execvp research**
 
-By researching and testing we figured out that execvp will automatically return after used. To prevent this from bringing the program to a
-hault, fork is used to create a copy thread that will be closed. Waitpid is used to force the parrent to wait for the child to close. This
+By researching and testing we figured out that execvp will not automatically return after used and must be exited using exit(0). fork is used to create a copy thread that will be closed. Waitpid is used to force the parrent to wait for the child to close. This
 is useful in the case of using execvp because we just created a thread for the purpose of closing it. 
 
 An important note is that execvp takes in char * * and char * parameters. Because of that we are forced to create new char * that must
