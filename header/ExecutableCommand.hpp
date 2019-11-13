@@ -24,7 +24,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         int ReturnPassOrFail(); //Returns pass or fail integer*/
         ExecutableCommand(const char* words[50]);
         ~ExecutableCommand();
-        void ParseUserInput(std::string cheese);
+        UserInput* ParseUserInput(std::string cheese);
         bool PerformNext(UserInput * one, UserInput * two);
         void doInput();
 };
