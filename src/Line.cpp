@@ -65,10 +65,9 @@
 
 void Line::ParseUserInput(string cheese){
     string s = "";
-    vector<string> temp_vector;
+     vector<string> temp_vector;
     for(unsigned int i = 0; i < cheese.size(); i++){
         if(cheese[i] == ' '){
-            s += cheese[i];
             temp_vector.push_back(s);
             s = "";
         }
@@ -85,7 +84,7 @@ void Line::ParseUserInput(string cheese){
             i++;
             s += cheese[i];
             temp_vector.push_back(s);
-            s = "";
+             s = "";
             i++;
         }
         else if(cheese[i] == ';'){
@@ -95,58 +94,70 @@ void Line::ParseUserInput(string cheese){
             i++;
         }
         else{
-            if(cheese[i] == '#'){
-                i = cheese.size();
-            }
         s+= cheese[i];
         }
     }
     temp_vector.push_back(s);
-    
-
-    for(unsigned int i = 0; i < temp_vector.size(); i++){
-        std::cout << temp_vector[i] << std::endl;
-    }
-
-
     vector<const char*> ggs;
     const char* charArray;
     for(unsigned int i = 0; i < temp_vector.size(); i++){
-        charArray = temp_vector[i].c_str();
+        charArray = temp_vector[i].c_str();        
         ggs.push_back(charArray);
-    }
 
-    for(unsigned int i = 0; i < ggs.size(); i++){
-        cout << ggs[i] << endl;
     }
-
     const char* doubleAnd = "&&";
     const char* doubleOr = "||";
     const char* semicolon = ";";
     Line *new_line = new Line;
-    int k;
-    const char* temp[50];
+    int k = 0;
+    const char* temp[50];   
     for(unsigned int i = 0; i < ggs.size(); i++){
+        if((strcmp(doubleAnd,ggs[i]) == 0)){                               
+            UserInput* new_executable_command = new ExecutableCommand(temp);
+            this->Inputs.push_back(new_executable_command);
+            UserInput* new_symbol = new DoubleAnd(ggs[i]);
+            this->Inputs.push_back(new_symbol);            
             for(int y =0; y < 50;y++){
                 temp[y] = NULL;
             }
-        k = 0;
-            while(ggs[i] != doubleAnd && ggs[i] != doubleOr && ggs[i] != semicolon && i < ggs.size()){
-                temp[k] = ggs[i];
-                i++;
-                k++;
+            k = 0;
+        }        
+        else if((strcmp(doubleOr,ggs[i]) == 0)){          
+            UserInput* new_executable_command = new ExecutableCommand(temp);
+            this->Inputs.push_back(new_executable_command);
+            UserInput* new_symbol = new DoubleSlash(ggs[i]);
+            this->Inputs.push_back(new_symbol);
+            for(int y =0; y < 50;y++){
+
+                temp[y] = NULL;
             }
-            if(i == ggs.size()){
-                UserInput* new_executable_command = new ExecutableCommand(temp);
-                new_line->Inputs.push_back(new_executable_command);
-                break;
+            k = 0;
+         }
+        
+        else if((strcmp(semicolon,ggs[i]) == 0)){
+            UserInput* new_executable_command = new ExecutableCommand(temp);
+            this->Inputs.push_back(new_executable_command);
+            UserInput* new_symbol = new SemiColon(ggs[i]);
+            this->Inputs.push_back(new_symbol);
+            
+            for(int y =0; y < 50;y++){
+                temp[y] = NULL;
             }
-            else{
-                UserInput* new_executable_command = new ExecutableCommand(temp);
-                new_line->Inputs.push_back(new_executable_command);
-                UserInput* new_symbol = new Symbol(ggs[i]);
-                new_line->Inputs.push_back(new_symbol);
-            }
+            k = 0;
+        }
+        else {
+            temp[k] = ggs[i];
+            k++;
+        }
     }
-    return;
+    const char* empty[50];
+
+           
+    UserInput* new_executable_command = new ExecutableCommand(temp);
+    this->Inputs.push_back(new_executable_command);
+    UserInput* new_symbol = new SemiColon(ggs[0]);
+    this->Inputs.push_back(new_symbol);
+/*    this->Inputs.push_back(new ExecutableCommand(empty));*/
+    cout << new_line->Inputs.size();
+    return new_line;
 }
