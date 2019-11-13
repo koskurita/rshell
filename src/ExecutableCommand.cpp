@@ -30,7 +30,7 @@
 
     
     ////DO NOT CALL THESE
-    void ExecutableCommand::ParseUserInput(std::string cheese){//do not call
+    UserInput* ExecutableCommand::ParseUserInput(std::string cheese){//do not call
         std::cout << "Error, do not call parseUserINput in executablecommand";
     }
 
