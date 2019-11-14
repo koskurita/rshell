@@ -466,11 +466,15 @@ UserInput* Line::ParseUserInput(string cheese){
     for(unsigned int i = 0; i < cheese.size(); i++){
 
         if(cheese[i] == ' '){
-
-            temp_vector.push_back(s);
-
-            s = "";
-            end_w_q = 0;
+            if(cheese[i-1] == '&' || cheese[i-1] == '|' || cheese[i-1] == ';'){
+                 s = "";
+                end_w_q = 0;
+            }
+            else{
+                temp_vector.push_back(s);
+                s = "";
+                end_w_q = 0;
+            }
 
         }
         else if(cheese[i] == '"'){
@@ -486,27 +490,31 @@ UserInput* Line::ParseUserInput(string cheese){
         }
         
         else if(cheese[i] == '#'){
-            end_w_q = 0;
+            end_w_q = 1;
             break;
         }
 
         else if(cheese[i] == '&'){
-
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s = "";
+            }
+            
             s = cheese[i];
-
             i++;
-
             s += cheese[i];
-
             temp_vector.push_back(s);
 
             s = "";
 
-            i++;
 
         }
 
         else if(cheese[i] == '|'){
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s = "";
+            }
 
             s = cheese[i];
 
@@ -518,19 +526,19 @@ UserInput* Line::ParseUserInput(string cheese){
 
             s = "";
 
-            i++;
-
         }
 
         else if(cheese[i] == ';'){
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s = "";
+            }
 
             s = cheese[i];
 
             temp_vector.push_back(s);
 
             s = "";
-
-            i++;
 
         }
 
@@ -605,7 +613,7 @@ UserInput* Line::ParseUserInput(string cheese){
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleAnd(ggs[i]);
+            UserInput* new_symbol = new DoubleSlash(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             
@@ -623,7 +631,7 @@ UserInput* Line::ParseUserInput(string cheese){
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleSlash(ggs[i]);
+            UserInput* new_symbol = new DoubleAnd(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             for(int y =0; y < 50;y++){
