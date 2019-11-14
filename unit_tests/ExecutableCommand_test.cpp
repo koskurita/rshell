@@ -2,7 +2,8 @@
 #include "gtest/gtest.h"
 
 TEST(UserInputTest, TestSetPassOrFail) {
-    UserInput * tester = new ExecutableCommand();
+    const char* arr[50];
+    UserInput * tester = new ExecutableCommand(arr);
     tester->SetPassOrFail(1);
     EXPECT_EQ(tester->returnPassOrFail(), 1);
 
