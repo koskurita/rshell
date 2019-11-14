@@ -1,5 +1,4 @@
-#include "UserInput.cpp"
-#include "Symbol.cpp"
+#include "everything.hpp"
 #include "gtest/gtest.h"
 
 
