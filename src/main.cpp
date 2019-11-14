@@ -727,5 +727,6 @@ cout << "$";
 getline(cin,input);
 cout << endl;
 mainVec->ParseUserInput(input);
+}
 return 0;
 }
