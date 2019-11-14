@@ -458,6 +458,7 @@ return true;
 
 UserInput* Line::ParseUserInput(string cheese){
 
+    int end_w_q = 0;
     string s = "";
 
     vector<string> temp_vector;
@@ -469,10 +470,23 @@ UserInput* Line::ParseUserInput(string cheese){
             temp_vector.push_back(s);
 
             s = "";
+            end_w_q = 0;
 
+        }
+        else if(cheese[i] == '"'){
+            i++;
+            while(cheese[i] != '"'){
+                s += cheese[i];
+                i++;
+            }
+            temp_vector.push_back(s);
+            s = "";
+            i++;
+            end_w_q = 1;
         }
         
         else if(cheese[i] == '#'){
+            end_w_q = 0;
             break;
         }
 
@@ -523,12 +537,14 @@ UserInput* Line::ParseUserInput(string cheese){
         else{
 
         s+= cheese[i];
-
+        end_w_q = 0;
         }
 
     }
-
-    temp_vector.push_back(s);
+    
+    if(end_w_q == 0){
+        temp_vector.push_back(s);
+    }
 
     
 
@@ -696,7 +712,7 @@ UserInput* Line::ParseUserInput(string cheese){
 
 int main(){
 UserInput * mainLine = new Line();
-mainLine->ParseUserInput("ls -a && ls -a || ls -a");
+mainLine->ParseUserInput("echo \"a && b \" ");
 
 //further tests as the first is acomplished:
 mainLine->doInput();
