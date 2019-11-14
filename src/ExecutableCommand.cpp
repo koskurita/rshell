@@ -1,5 +1,5 @@
 #include <iostream>
-//#include "ExecutableCommand.hpp"
+#include "ExecutableCommand.hpp"
 
     ExecutableCommand::ExecutableCommand(const char* words[50]){ // constructor
         ID = 1;
@@ -21,11 +21,11 @@
   
    
     void ExecutableCommand::SetPassOrFail(int oneOrZero){
-         this->passOrFail = oneOrZero;
+         this->SetPassOrFail(oneOrZero);
      }
      
     int ReturnPassOrFail(){
-        return this->passOrFail;
+        return ReturnPassOrFail();
     } //Returns pass or fail integer*/
 
     

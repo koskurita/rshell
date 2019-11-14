@@ -1,4 +1,4 @@
-fndef __USERINPUT_HPP__
+#ifndef __USERINPUT_HPP__
 
 #define __USERINPUT_HPP__
 
@@ -28,6 +28,7 @@ fndef __USERINPUT_HPP__
 
 #include <unistd.h>
 
+using namespace std;
 
 
 class UserInput{
@@ -40,15 +41,14 @@ class UserInput{
 
     public:
 
-        int ReadID();
 
-        virtual UserInput* ParseUserInput(string cheese);
+        virtual UserInput* ParseUserInput(string cheese) = 0;
 
-        virtual void doInput();
+        virtual void doInput() = 0;
 
-        virtual void SetPassOrFail(int oneOrZero);
+        virtual void SetPassOrFail(int oneOrZero) = 0;
 
-        virtual bool PerformNext(UserInput* one, UserInput* two);
+        virtual bool PerformNext(UserInput* one, UserInput* two) = 0;
 
         int returnID();
 

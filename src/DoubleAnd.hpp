@@ -1,4 +1,4 @@
-fndef __DOUBLEAND_H__
+#ifndef __DOUBLEAND_H__
 
 #define __DOUBLEAND_H__
 
@@ -27,7 +27,7 @@ fndef __DOUBLEAND_H__
 #include <sys/wait.h>
 
 #include <unistd.h>
-
+#include "Symbol.cpp"
 
 
 class DoubleAnd:public Symbol{
@@ -42,7 +42,7 @@ class DoubleAnd:public Symbol{
 
     public:
 
-        DoubleAnd(const char * s):Symbol(s);
+        DoubleAnd(const char * s);
 
         bool PerformNext(UserInput * one, UserInput * two);
 

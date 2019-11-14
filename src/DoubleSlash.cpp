@@ -1,5 +1,5 @@
 #include <iostream>
-//#include "DoubleSlash.hpp"
+#include "DoubleSlash.hpp"
 
     DoubleSlash::DoubleSlash(const char * s):Symbol(s){//default constructor
         ID = 102;

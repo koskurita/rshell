@@ -1,4 +1,4 @@
-fndef __SYMBOLL_H__
+#ifndef __SYMBOLL_H__
 
 #define __SYMBOL_H__
 
@@ -27,8 +27,9 @@ fndef __SYMBOLL_H__
 #include <sys/wait.h>
 
 #include <unistd.h>
+#include "UserInput.cpp"
 
-
+using namespace std;
 
 class Symbol: public UserInput {
 
@@ -46,7 +47,7 @@ class Symbol: public UserInput {
 
         Symbol(const char* s);
 
-        UserInput* ParseUserInput(std::string cheese);
+        virtual UserInput* ParseUserInput(std::string cheese);
 
         void doInput();
 

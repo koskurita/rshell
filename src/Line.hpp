@@ -1,8 +1,6 @@
-fndef __LINE_H__
+#ifndef __LINE_H__
 
 #define __LINE_H__
-
-
 
 #include <iostream>
 
@@ -25,10 +23,16 @@ fndef __LINE_H__
 #include <stdio.h>
 
 #include <sys/wait.h>
-
+#include <string.h>
 #include <unistd.h>
+#include "UserInput.cpp"
+#include "ExecutableCommand.cpp"
+#include "SemiColon.cpp"
+#include "DoubleAnd.cpp"
+#include "DoubleSlash.cpp"
 
 
+using namespace std;
 
 class Line: public UserInput {
 
@@ -41,12 +45,10 @@ class Line: public UserInput {
     int passOrFail = -1;
 
     public:
+	Line();
+	~Line();
 
-    Line();
-
-    ~Line();
-
-    void SetPassOrFail(int oneOrZero){;
+    void SetPassOrFail(int oneOrZero);
 
     int ReturnPassOrFail();
 

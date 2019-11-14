@@ -1,4 +1,4 @@
-fndef __SEMICOLON_H__
+#ifndef __SEMICOLON_H__
 
 #define __SEMICOLON_H__
 
@@ -27,7 +27,7 @@ fndef __SEMICOLON_H__
 #include <sys/wait.h>
 
 #include <unistd.h>
-
+#include "Symbol.cpp" 
 
 
 class SemiColon: public Symbol{

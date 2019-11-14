@@ -1,5 +1,7 @@
 #include <iostream>
-//#include "Line.hpp"
+#include "Line.hpp"
+
+
 
     Line::Line(){//default constructor
         ID = 2;
@@ -33,7 +35,7 @@
     ////
 
     void Line::doInput(){
-        unsigned int IterInt = 0; 
+	  unsigned int IterInt = 0; 
 
         while(IterInt < Inputs.size()){//while iterInt < SizeOVec
             if (Inputs[IterInt]->returnID() > 100){ //if Inputs[IterInt] = Symbol
@@ -49,7 +51,7 @@
             }
             else{
 		if(IterInt == Inputs.size() - 1){
-			if(Inputs[IterInt]->returnPassOrFail != 0)   //if the last executable command's passOrFail has not been set to fail...
+			if(Inputs[IterInt]->returnPassOrFail() != 0)   //if the last executable command's passOrFail has not been set to fail...
 				if(Inputs[IterInt]->returnID() < 100)//and the last thing in the vector IS an executableCommand...
 					Inputs[IterInt]->doInput();  //run doInput.
 		}
@@ -58,10 +60,11 @@
             }
 
         }
-    
+
     }
   
-    UserInput* Line::ParseUserInput(string cheese){
+
+UserInput* Line::ParseUserInput(string cheese){
 
     int end_w_q = 0;
     string s = "";
@@ -71,11 +74,15 @@
     for(unsigned int i = 0; i < cheese.size(); i++){
 
         if(cheese[i] == ' '){
-
-            temp_vector.push_back(s);
-
-            s = "";
-            end_w_q = 0;
+            if(cheese[i-1] == '&' || cheese[i-1] == '|' || cheese[i-1] == ';'){
+                 s = "";
+                end_w_q = 0;
+            }
+            else{
+                temp_vector.push_back(s);
+                s = "";
+                end_w_q = 0;
+            }
 
         }
         else if(cheese[i] == '"'){
@@ -91,27 +98,31 @@
         }
         
         else if(cheese[i] == '#'){
-            end_w_q = 0;
+            end_w_q = 1;
             break;
         }
 
         else if(cheese[i] == '&'){
-
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s = "";
+            }
+            
             s = cheese[i];
-
             i++;
-
             s += cheese[i];
-
             temp_vector.push_back(s);
 
             s = "";
 
-            i++;
 
         }
 
         else if(cheese[i] == '|'){
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s = "";
+            }
 
             s = cheese[i];
 
@@ -123,19 +134,19 @@
 
             s = "";
 
-            i++;
-
         }
 
         else if(cheese[i] == ';'){
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s = "";
+            }
 
             s = cheese[i];
 
             temp_vector.push_back(s);
 
             s = "";
-
-            i++;
 
         }
 
@@ -155,11 +166,11 @@
 
 
 /*
-    for(unsigned int i = 0; i < temp_vector.size(); i++){
-
-        std::cout << temp_vector[i] << std::endl;
-
-    }*/
+ *     for(unsigned int i = 0; i < temp_vector.size(); i++){
+ *
+ *             std::cout << temp_vector[i] << std::endl;
+ *
+ *                 }*/
 
 
 
@@ -181,11 +192,11 @@
 
 
 /*    for(unsigned int i = 0; i < ggs.size(); i++){
-
-        cout << ggs[i] << endl;
-
-    }
-*/
+ *
+ *            cout << ggs[i] << endl;
+ *
+ *                }
+ *                */
 
 
     const char* doubleAnd = "&&";
@@ -210,7 +221,7 @@
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleAnd(ggs[i]);
+            UserInput* new_symbol = new DoubleSlash(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             
@@ -228,7 +239,7 @@
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleSlash(ggs[i]);
+            UserInput* new_symbol = new DoubleAnd(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             for(int y =0; y < 50;y++){
@@ -267,50 +278,16 @@
     this->Inputs.push_back(new_executable_command);
     UserInput* new_symbol = new SemiColon(ggs[0]);
     this->Inputs.push_back(new_symbol);
-/*    this->Inputs.push_back(new ExecutableCommand(empty));*/
-    
 
         
         
         
 
-          /*  while(!(ggs[i] == doubleAnd || ggs[i] == doubleOr || ggs[i] == semicolon) && i < ggs.size()){
-                cout << ggs[i];
-                cout << "test1" << endl;
-                temp[k] = ggs[i];
-
-                i++;
-
-                k++;
-
-            }
-
-            if(i == ggs.size()){
-                UserInput* new_executable_command = new ExecutableCommand(temp);
-
-                this->Inputs.push_back(new_executable_command);
-                cout << "test2" << endl;
-
-                break;
-
-            }
-
-            else{
-                cout << "test3" << endl;
-
-                UserInput* new_executable_command = new ExecutableCommand(temp);
-
-                this->Inputs.push_back(new_executable_command);
-
-                UserInput* new_symbol = new Symbol(ggs[i]);
-
-                this->Inputs.push_back(new_symbol);
-
-            }
-
-    }*/
     cout << new_line->Inputs.size();
 
     return new_line;
 
 }
+
+}
+

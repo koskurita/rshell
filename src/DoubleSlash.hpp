@@ -1,4 +1,4 @@
-fndef __DOUBLESLASH_HPP__
+#ifndef __DOUBLESLASH_HPP__
 
 #define __DOUBLESLASH_HPP__
 
@@ -27,7 +27,7 @@ fndef __DOUBLESLASH_HPP__
 #include <sys/wait.h>
 
 #include <unistd.h>
-
+#include "Symbol.cpp"
 
 
 
@@ -44,7 +44,7 @@ class DoubleSlash:public Symbol{
 
     public:
 
-        DoubleSlash(const char * s):Symbol(s);
+        DoubleSlash(const char * s);
 
         bool PerformNext(UserInput * one, UserInput * two);
 

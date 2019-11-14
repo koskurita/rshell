@@ -1,9 +1,6 @@
 #include <iostream>
-//#include "UserInput.hpp"
+#include "UserInput.hpp"
 
-    int UserInput::ReadID(){
-        return ID;
-    }
         
     int UserInput::returnID(){
         return ID;

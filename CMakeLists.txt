@@ -5,7 +5,7 @@ ADD_SUBDIRECTORY(googletest)
 SET(CMAKE_CXX_STANDARD 11)
 
 ADD_EXECUTABLE(test
-    unit_tests/DoubleAnd_test.hpp
+ unit_tests/DoubleAnd_test.hpp
 unit_tests/DoubleSlash_test.hpp
 unit_tests/ExecutableCommand_test.hpp
 unit_tests/Line_Test.hpp
@@ -24,13 +24,13 @@ ADD_EXECUTABLE(rshell
     src/SemiColon.cpp
     src/Symbol.cpp
     src/UserInput.cpp
-    header/DoubleAnd.hpp
-    header/DoubleSlash.hpp
-    header/ExecutableCommand.hpp
-    header/Line.hpp
-    header/SemiColon.hpp
-    header/Symbol.hpp
-    header/UserInput.hpp
+    src/DoubleAnd.hpp
+    src/DoubleSlash.hpp
+    src/ExecutableCommand.hpp
+    src/Line.hpp
+    src/SemiColon.hpp
+    src/Symbol.hpp
+    src/UserInput.hpp
 
 
 )

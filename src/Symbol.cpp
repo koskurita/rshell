@@ -1,19 +1,15 @@
 #include <iostream>
-//#include "Symbol.hpp"
+#include "Symbol.hpp"
 
-
-  virtual Symbol::bool PerformNext(UserInput* one, UserInput* two){
-    two->SetPassOrFail(1);
-    return true;
-    }
+using namespace std;
 
     Symbol::Symbol(const char* s){//default constructor
             symbol = s;
             ID = 100;
         }
 
-    void Symbol::ParseUserInput(std::string cheese){//dont use this
-        std::cout<< "Symbols dont call ParseUserInput"; return;
+    UserInput* Symbol::ParseUserInput(std::string cheese){//dont use this
+        std::cout<< "Symbols dont call ParseUserInput"; return NULL;
     }
 
     void Symbol::SetPassOrFail(int oneOrZero){//dont use this

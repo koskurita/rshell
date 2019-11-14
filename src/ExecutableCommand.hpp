@@ -27,7 +27,8 @@
 #include <sys/wait.h>
 
 #include <unistd.h>
-
+#include "string.h"
+#include "UserInput.cpp"
 
 
 class ExecutableCommand: public UserInput { // USE CONST CHAR
