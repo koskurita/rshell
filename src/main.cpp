@@ -191,7 +191,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
     ExecutableCommand(const char* words[50]){ // constructor
 
         ID = 1;
-
+        cout << words[0];
     
 
     int iterInt = 0;
@@ -466,6 +466,7 @@ UserInput* Line::ParseUserInput(string cheese){
     for(unsigned int i = 0; i < cheese.size(); i++){
 
         if(cheese[i] == ' '){
+            if(i != 0){
             if(cheese[i-1] == '&' || cheese[i-1] == '|' || cheese[i-1] == ';'){
                  s = "";
                 end_w_q = 0;
@@ -474,6 +475,7 @@ UserInput* Line::ParseUserInput(string cheese){
                 temp_vector.push_back(s);
                 s = "";
                 end_w_q = 0;
+            }
             }
 
         }
@@ -712,21 +714,36 @@ UserInput* Line::ParseUserInput(string cheese){
             }
 
     }*/
-    cout << new_line->Inputs.size();
+
 
     return new_line;
 
 }
+/*
+int main(){
+UserInput * mainLine = new Line();
+mainLine->ParseUserInput("ls");
+
+//further tests as the first is acomplished:
+mainLine->doInput();
+  delete mainLine;
+  return 0;
+
+}*/
 
 int main(){
-UserInput * mainVec = new Line();
 
-string input = "";
-while (input != "exit" || input != "Exit"){
-cout << "$";
-getline(cin,input);
-cout << endl;
-mainVec->ParseUserInput(input);
-}
+    string input;
+    while (true){
+        UserInput * mainVec = new Line();
+        cout << "$";
+        getline(cin,input);
+        if(input == "exit" || input == "Exit"){
+            return 0;
+        }
+        mainVec->ParseUserInput(input);
+        mainVec->doInput();
+        delete mainVec;
+    }
 return 0;
 }
