@@ -153,7 +153,7 @@ UserInput* ParseUserInput(std::string cheese);
             }
             else{
 		if(IterInt == Inputs.size() - 1){
-			if(Inputs[IterInt]->returnPassOrFail != 0)   //if the last executable command's passOrFail has not been set to fail...
+			if(Inputs[IterInt]->returnPassOrFail() != 0)   //if the last executable command's passOrFail has not been set to fail...
 				if(Inputs[IterInt]->returnID() < 100)//and the last thing in the vector IS an executableCommand...
 					Inputs[IterInt]->doInput();  //run doInput.
 		}
@@ -470,6 +470,10 @@ UserInput* Line::ParseUserInput(string cheese){
 
             s = "";
 
+        }
+        
+        else if(cheese[i] == '#'){
+            break;
         }
 
         else if(cheese[i] == '&'){
