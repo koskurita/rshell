@@ -48,10 +48,10 @@ RM = /usr/bin/cmake3 -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/csmajs/rwyat002/assignment-team_robert_kosuke
+CMAKE_SOURCE_DIR = /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/csmajs/rwyat002/assignment-team_robert_kosuke
+CMAKE_BINARY_DIR = /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,9 +126,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/rwyat002/assignment-team_robert_kosuke/CMakeFiles /home/csmajs/rwyat002/assignment-team_robert_kosuke/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke/CMakeFiles /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/rwyat002/assignment-team_robert_kosuke/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -234,194 +234,59 @@ gtest/fast:
 	$(MAKE) -f googletest/googletest/CMakeFiles/gtest.dir/build.make googletest/googletest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
-src/DoubleAnd.o: src/DoubleAnd.cpp.o
+src/main.o: src/main.cpp.o
 
-.PHONY : src/DoubleAnd.o
-
-# target to build an object file
-src/DoubleAnd.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/DoubleAnd.cpp.o
-.PHONY : src/DoubleAnd.cpp.o
-
-src/DoubleAnd.i: src/DoubleAnd.cpp.i
-
-.PHONY : src/DoubleAnd.i
-
-# target to preprocess a source file
-src/DoubleAnd.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/DoubleAnd.cpp.i
-.PHONY : src/DoubleAnd.cpp.i
-
-src/DoubleAnd.s: src/DoubleAnd.cpp.s
-
-.PHONY : src/DoubleAnd.s
-
-# target to generate assembly for a file
-src/DoubleAnd.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/DoubleAnd.cpp.s
-.PHONY : src/DoubleAnd.cpp.s
-
-src/DoubleSlash.o: src/DoubleSlash.cpp.o
-
-.PHONY : src/DoubleSlash.o
+.PHONY : src/main.o
 
 # target to build an object file
-src/DoubleSlash.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/DoubleSlash.cpp.o
-.PHONY : src/DoubleSlash.cpp.o
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-src/DoubleSlash.i: src/DoubleSlash.cpp.i
+src/main.i: src/main.cpp.i
 
-.PHONY : src/DoubleSlash.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-src/DoubleSlash.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/DoubleSlash.cpp.i
-.PHONY : src/DoubleSlash.cpp.i
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-src/DoubleSlash.s: src/DoubleSlash.cpp.s
+src/main.s: src/main.cpp.s
 
-.PHONY : src/DoubleSlash.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-src/DoubleSlash.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/DoubleSlash.cpp.s
-.PHONY : src/DoubleSlash.cpp.s
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
-src/ExecutableCommand.o: src/ExecutableCommand.cpp.o
+unit_tests/testfile.o: unit_tests/testfile.cpp.o
 
-.PHONY : src/ExecutableCommand.o
+.PHONY : unit_tests/testfile.o
 
 # target to build an object file
-src/ExecutableCommand.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/ExecutableCommand.cpp.o
-.PHONY : src/ExecutableCommand.cpp.o
+unit_tests/testfile.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_tests/testfile.cpp.o
+.PHONY : unit_tests/testfile.cpp.o
 
-src/ExecutableCommand.i: src/ExecutableCommand.cpp.i
+unit_tests/testfile.i: unit_tests/testfile.cpp.i
 
-.PHONY : src/ExecutableCommand.i
-
-# target to preprocess a source file
-src/ExecutableCommand.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/ExecutableCommand.cpp.i
-.PHONY : src/ExecutableCommand.cpp.i
-
-src/ExecutableCommand.s: src/ExecutableCommand.cpp.s
-
-.PHONY : src/ExecutableCommand.s
-
-# target to generate assembly for a file
-src/ExecutableCommand.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/ExecutableCommand.cpp.s
-.PHONY : src/ExecutableCommand.cpp.s
-
-src/Line.o: src/Line.cpp.o
-
-.PHONY : src/Line.o
-
-# target to build an object file
-src/Line.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Line.cpp.o
-.PHONY : src/Line.cpp.o
-
-src/Line.i: src/Line.cpp.i
-
-.PHONY : src/Line.i
+.PHONY : unit_tests/testfile.i
 
 # target to preprocess a source file
-src/Line.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Line.cpp.i
-.PHONY : src/Line.cpp.i
+unit_tests/testfile.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_tests/testfile.cpp.i
+.PHONY : unit_tests/testfile.cpp.i
 
-src/Line.s: src/Line.cpp.s
+unit_tests/testfile.s: unit_tests/testfile.cpp.s
 
-.PHONY : src/Line.s
-
-# target to generate assembly for a file
-src/Line.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Line.cpp.s
-.PHONY : src/Line.cpp.s
-
-src/SemiColon.o: src/SemiColon.cpp.o
-
-.PHONY : src/SemiColon.o
-
-# target to build an object file
-src/SemiColon.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/SemiColon.cpp.o
-.PHONY : src/SemiColon.cpp.o
-
-src/SemiColon.i: src/SemiColon.cpp.i
-
-.PHONY : src/SemiColon.i
-
-# target to preprocess a source file
-src/SemiColon.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/SemiColon.cpp.i
-.PHONY : src/SemiColon.cpp.i
-
-src/SemiColon.s: src/SemiColon.cpp.s
-
-.PHONY : src/SemiColon.s
+.PHONY : unit_tests/testfile.s
 
 # target to generate assembly for a file
-src/SemiColon.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/SemiColon.cpp.s
-.PHONY : src/SemiColon.cpp.s
-
-src/Symbol.o: src/Symbol.cpp.o
-
-.PHONY : src/Symbol.o
-
-# target to build an object file
-src/Symbol.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Symbol.cpp.o
-.PHONY : src/Symbol.cpp.o
-
-src/Symbol.i: src/Symbol.cpp.i
-
-.PHONY : src/Symbol.i
-
-# target to preprocess a source file
-src/Symbol.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Symbol.cpp.i
-.PHONY : src/Symbol.cpp.i
-
-src/Symbol.s: src/Symbol.cpp.s
-
-.PHONY : src/Symbol.s
-
-# target to generate assembly for a file
-src/Symbol.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Symbol.cpp.s
-.PHONY : src/Symbol.cpp.s
-
-src/UserInput.o: src/UserInput.cpp.o
-
-.PHONY : src/UserInput.o
-
-# target to build an object file
-src/UserInput.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/UserInput.cpp.o
-.PHONY : src/UserInput.cpp.o
-
-src/UserInput.i: src/UserInput.cpp.i
-
-.PHONY : src/UserInput.i
-
-# target to preprocess a source file
-src/UserInput.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/UserInput.cpp.i
-.PHONY : src/UserInput.cpp.i
-
-src/UserInput.s: src/UserInput.cpp.s
-
-.PHONY : src/UserInput.s
-
-# target to generate assembly for a file
-src/UserInput.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/UserInput.cpp.s
-.PHONY : src/UserInput.cpp.s
+unit_tests/testfile.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_tests/testfile.cpp.s
+.PHONY : unit_tests/testfile.cpp.s
 
 # Help Target
 help:
@@ -441,27 +306,12 @@ help:
 	@echo "... gmock"
 	@echo "... gtest_main"
 	@echo "... gtest"
-	@echo "... src/DoubleAnd.o"
-	@echo "... src/DoubleAnd.i"
-	@echo "... src/DoubleAnd.s"
-	@echo "... src/DoubleSlash.o"
-	@echo "... src/DoubleSlash.i"
-	@echo "... src/DoubleSlash.s"
-	@echo "... src/ExecutableCommand.o"
-	@echo "... src/ExecutableCommand.i"
-	@echo "... src/ExecutableCommand.s"
-	@echo "... src/Line.o"
-	@echo "... src/Line.i"
-	@echo "... src/Line.s"
-	@echo "... src/SemiColon.o"
-	@echo "... src/SemiColon.i"
-	@echo "... src/SemiColon.s"
-	@echo "... src/Symbol.o"
-	@echo "... src/Symbol.i"
-	@echo "... src/Symbol.s"
-	@echo "... src/UserInput.o"
-	@echo "... src/UserInput.i"
-	@echo "... src/UserInput.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... unit_tests/testfile.o"
+	@echo "... unit_tests/testfile.i"
+	@echo "... unit_tests/testfile.s"
 .PHONY : help
 
 

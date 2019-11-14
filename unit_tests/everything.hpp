@@ -346,7 +346,7 @@ class DoubleAnd:public Symbol{
 
     const char* symbol;
 /*
-    int ID;*/
+ *     int ID;*/
 
     int passOrFail = -1;
 
@@ -558,11 +558,11 @@ UserInput* Line::ParseUserInput(string cheese){
 
 
 /*
-    for(unsigned int i = 0; i < temp_vector.size(); i++){
-
-        std::cout << temp_vector[i] << std::endl;
-
-    }*/
+ *     for(unsigned int i = 0; i < temp_vector.size(); i++){
+ *
+ *             std::cout << temp_vector[i] << std::endl;
+ *
+ *                 }*/
 
 
 
@@ -584,11 +584,11 @@ UserInput* Line::ParseUserInput(string cheese){
 
 
 /*    for(unsigned int i = 0; i < ggs.size(); i++){
-
-        cout << ggs[i] << endl;
-
-    }
-*/
+ *
+ *            cout << ggs[i] << endl;
+ *
+ *                }
+ *                */
 
 
     const char* doubleAnd = "&&";
@@ -684,3 +684,4 @@ UserInput* Line::ParseUserInput(string cheese){
     return new_line;
 
 }
+
