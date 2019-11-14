@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Symbol.hpp"
+//#include "Symbol.hpp"
 
 
   virtual Symbol::bool PerformNext(UserInput* one, UserInput* two){
