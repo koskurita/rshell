@@ -1,5 +1,5 @@
 #include <iostream>
-#include "DoubleAnd.hpp"
+//#include "DoubleAnd.hpp"
 
     DoubleAnd::DoubleAnd(const char * s):Symbol(s){//default constructor
         ID = 103;
