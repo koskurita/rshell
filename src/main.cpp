@@ -132,7 +132,7 @@ class Line: public UserInput {
 
     }
 
-UserInput* ParseUserInput(std::string cheese);
+UserInput* ParseUserInput(string cheese);
 
 
 
@@ -191,8 +191,6 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
     ExecutableCommand(const char* words[50]){ // constructor
 
         ID = 1;
-
-    
 
     int iterInt = 0;
 
@@ -466,11 +464,17 @@ UserInput* Line::ParseUserInput(string cheese){
     for(unsigned int i = 0; i < cheese.size(); i++){
 
         if(cheese[i] == ' '){
-
-            temp_vector.push_back(s);
-
-            s = "";
-            end_w_q = 0;
+            if(i != 0){
+            if(cheese[i-1] == '&' || cheese[i-1] == '|' || cheese[i-1] == ';'){
+                 s.clear();
+                end_w_q = 0;
+            }
+            else{
+                temp_vector.push_back(s);
+                s.clear();
+                end_w_q = 0;
+            }
+            }
 
         }
         else if(cheese[i] == '"'){
@@ -480,33 +484,37 @@ UserInput* Line::ParseUserInput(string cheese){
                 i++;
             }
             temp_vector.push_back(s);
-            s = "";
+            s.clear();
             i++;
             end_w_q = 1;
         }
         
         else if(cheese[i] == '#'){
-            end_w_q = 0;
+            end_w_q = 1;
             break;
         }
 
         else if(cheese[i] == '&'){
-
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s.clear();
+            }
+            
             s = cheese[i];
-
             i++;
-
             s += cheese[i];
-
             temp_vector.push_back(s);
 
-            s = "";
+            s.clear();
 
-            i++;
 
         }
 
         else if(cheese[i] == '|'){
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s = "";
+            }
 
             s = cheese[i];
 
@@ -516,21 +524,21 @@ UserInput* Line::ParseUserInput(string cheese){
 
             temp_vector.push_back(s);
 
-            s = "";
-
-            i++;
+            s.clear();
 
         }
 
         else if(cheese[i] == ';'){
+            if(cheese[i-1] != ' '){
+                temp_vector.push_back(s);
+                s.clear();
+            }
 
             s = cheese[i];
 
             temp_vector.push_back(s);
 
-            s = "";
-
-            i++;
+            s.clear();
 
         }
 
@@ -592,20 +600,28 @@ UserInput* Line::ParseUserInput(string cheese){
     Line *new_line = new Line;
 
     int k = 0;
+    
+    int sig = 0;
 
     const char* temp[50];
+    for(int y =0; y < 50;y++){
+
+                temp[y] = NULL;
+            }
+    k = 0;
+    
+    
     
 
     for(unsigned int i = 0; i < ggs.size(); i++){
         if((strcmp(doubleAnd,ggs[i]) == 0)){
             
             
-            
             UserInput* new_executable_command = new ExecutableCommand(temp);
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleAnd(ggs[i]);
+            UserInput* new_symbol = new DoubleSlash(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             
@@ -614,6 +630,7 @@ UserInput* Line::ParseUserInput(string cheese){
                 temp[y] = NULL;
             }
             k = 0;
+            sig = 0;
         }
         
         else if((strcmp(doubleOr,ggs[i]) == 0)){
@@ -623,7 +640,7 @@ UserInput* Line::ParseUserInput(string cheese){
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleSlash(ggs[i]);
+            UserInput* new_symbol = new DoubleAnd(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             for(int y =0; y < 50;y++){
@@ -631,6 +648,7 @@ UserInput* Line::ParseUserInput(string cheese){
                 temp[y] = NULL;
             }
             k = 0;
+            sig = 0;
          }
         
         else if((strcmp(semicolon,ggs[i]) == 0)){
@@ -647,77 +665,50 @@ UserInput* Line::ParseUserInput(string cheese){
                 temp[y] = NULL;
             }
             k = 0;
+            sig = 0;
         }
         else {
 
             temp[k] = ggs[i];
             k++;
+            sig = 1;
         }
     }
     
-    const char* empty[50];
+    if(sig == 1){
+        UserInput* new_executable_command = new ExecutableCommand(temp);
+        this->Inputs.push_back(new_executable_command);
+    }
 
-           
-    UserInput* new_executable_command = new ExecutableCommand(temp);
-    this->Inputs.push_back(new_executable_command);
-    UserInput* new_symbol = new SemiColon(ggs[0]);
-    this->Inputs.push_back(new_symbol);
-/*    this->Inputs.push_back(new ExecutableCommand(empty));*/
-    
-
-        
-        
-        
-
-          /*  while(!(ggs[i] == doubleAnd || ggs[i] == doubleOr || ggs[i] == semicolon) && i < ggs.size()){
-                cout << ggs[i];
-                cout << "test1" << endl;
-                temp[k] = ggs[i];
-
-                i++;
-
-                k++;
-
-            }
-
-            if(i == ggs.size()){
-                UserInput* new_executable_command = new ExecutableCommand(temp);
-
-                this->Inputs.push_back(new_executable_command);
-                cout << "test2" << endl;
-
-                break;
-
-            }
-
-            else{
-                cout << "test3" << endl;
-
-                UserInput* new_executable_command = new ExecutableCommand(temp);
-
-                this->Inputs.push_back(new_executable_command);
-
-                UserInput* new_symbol = new Symbol(ggs[i]);
-
-                this->Inputs.push_back(new_symbol);
-
-            }
-
-    }*/
-    cout << new_line->Inputs.size();
 
     return new_line;
 
 }
 
-int main(){
-UserInput * mainVec = new Line();
+/*int main(){
+    string s = "ls";
+    UserInput * mainLine = new Line();
+    mainLine->ParseUserInput(s);
+    mainLine->doInput();
+  delete mainLine;
+  return 0;
 
-string input = "";
-while (input != "exit" || input != "Exit"){
-cout << "$";
-getline(cin,input);
-cout << endl;
-mainVec->ParseUserInput(input);
+}*/
+
+int main(){
+    string myString;
+    
+    for (;;){
+        UserInput * mainVec = new Line();
+        cout << "$";
+        getline(cin,myString);
+        if(myString == "exit" || myString == "Exit"){
+            return 0;
+        }
+        mainVec->ParseUserInput(myString);
+        mainVec->doInput();
+        delete mainVec;
+        myString.clear();
+    }
 return 0;
 }
