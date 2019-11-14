@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Semicolon.hpp"
+//#include "Semicolon.hpp"
 
 
     bool SemiColon::PerformNext(UserInput * one, UserInput * two){
