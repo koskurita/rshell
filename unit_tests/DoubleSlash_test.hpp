@@ -1,6 +1,4 @@
-#include "UserInput.cpp"
-#include "Line.cpp"
-#include "DoubleSlash.cpp"
+#include "everything.cpp"
 #include "gtest/gtest.h"
 
 TEST(UserInputTest, TestSetPassOrFail) {
