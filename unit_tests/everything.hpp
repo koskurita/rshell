@@ -48,7 +48,8 @@ class UserInput{
 
         virtual void doInput() = 0;
 
-        virtual void SetPassOrFail(int oneOrZero) = 0;
+        virtual void SetPassOrFail(int oneOrZero)
+	{passOrFail = oneOrZero;}
 
         virtual bool PerformNext(UserInput* one, UserInput* two)=0;//returns true if the next command will execute, false if it will not
 
@@ -58,7 +59,7 @@ class UserInput{
 
         }
 
-        int returnPassOrFail(){
+     virtual int returnPassOrFail(){
 
             return passOrFail;
 
@@ -71,11 +72,8 @@ class Line: public UserInput {
 
     private:
 
-/*        int ID = 2;*/
-
     vector<UserInput*> Inputs;
 
-    int passOrFail = -1;
 
     public:
 
@@ -93,34 +91,15 @@ class Line: public UserInput {
 
     while (lastElement != -1){
 
-    delete Inputs[lastElement];
+	 delete Inputs[lastElement];
 
-    Inputs.pop_back(); // delete later 
+   	 Inputs.pop_back(); // delete later 
 
-    lastElement--;
+   	 lastElement--;
 
-    }
-
-    
-
-    
+    	}
 
     }
-
-    /*IF we ever put a line in a line then this becomes useful*/
-    
-     void SetPassOrFail(int oneOrZero){
-    
-     this->passOrFail = oneOrZero;
-    
-     }
-    
-    int ReturnPassOrFail(){
-    
-     return this->passOrFail;
-    
-       }
-
 
  bool PerformNext(UserInput *one, UserInput*two){//do not use perform next on a line
 
@@ -175,17 +154,8 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
         char* command[50];  //remove const
 
-        int passOrFail = -1;
-
-/*        int ID = 1;*/
 
     public:
-
-        void SetPassOrFail(int oneOrZero) // this function sets pass or fail to one or zero
-
-    {this->passOrFail = oneOrZero;}
-
-        int ReturnPassOrFail(){return this->passOrFail;} //Returns pass or fail integer*/
 
 
     ExecutableCommand(const char* words[50]){ // constructor
@@ -249,7 +219,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         std::cout << "Massive error, fork failed." << endl;
 
         }
-        else if (this->passOrFail == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
+        else if (this->returnPassOrFail() == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
 		if(child == 0) {
 		exit(1);//this ends child
 		}
@@ -265,12 +235,12 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
         	cout << endl << "failed to execute " << command[0] << endl; //we may want to delete this later
 
-        	this->passOrFail = 0;      //signals that user input failed. 
+        	this->SetPassOrFail(0);      //signals that user input failed. 
 		exit(1);
         	}
         	else{
 
-        	this->passOrFail = 1;      
+        	this->SetPassOrFail(1);      
 
         	exit(1);
 		}
@@ -289,9 +259,6 @@ class Symbol: public UserInput {
 
         const char* symbol;
 
-/*        int ID = 100;*/
-
-        int passOrFail = -1;
 
     public:
 
@@ -326,15 +293,15 @@ class Symbol: public UserInput {
         void doInput(){
 /*do nothing*/
 }
-           void SetPassOrFail(int oneOrZero){//dont use this
+         virtual  void SetPassOrFail(int oneOrZero){//dont use this
 
-        std::cout<< "Symbols dont call oneOrZero";}
+        std::cout<< "Symbols dont call setPassOrFail";}
 
 
 
-        int ReturnPassOrFail(){//dont use this
+    virtual int ReturnPassOrFail(){//dont use this
 
-    std::cout<< "Symbols dont call ReturnPassOrFail"; return 0;}
+    std::cout<< "Symbols dont call ReturnPassOrFail"; return -1;}
 
         
 
@@ -345,10 +312,7 @@ class DoubleAnd:public Symbol{
     private:
 
     const char* symbol;
-/*
- *     int ID;*/
 
-    int passOrFail = -1;
 
  public:   
 
@@ -385,9 +349,6 @@ class DoubleSlash:public Symbol{
 
     const char* s;
 
-/*    int ID;*/
-
-    int passOrFail = -1;
 
 public:
 
@@ -424,9 +385,6 @@ class SemiColon: public Symbol{
 
     const char* s;
 
-/*    int ID;*/
-
-    int passOrFail = -1;
 
 public:
 

@@ -1,8 +1,4 @@
-#ifndef __USERINPUT_HPP__
-
-#define __USERINPUT_HPP__
-
-
+#pragma once
 
 #include <iostream>
 
@@ -58,4 +54,4 @@ class UserInput{
 
 
 
-#endif /*__USERINPUT_H__*/
+

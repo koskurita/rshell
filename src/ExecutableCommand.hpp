@@ -1,8 +1,4 @@
-#ifndef __EXECUTABLECOMMAND_HPP__
-
-#define __EXECUTABLECOMMAND_HPP__
-
-
+#pragma once
 
 #include <iostream>
 
@@ -27,8 +23,8 @@
 #include <sys/wait.h>
 
 #include <unistd.h>
-#include "string.h"
-#include "UserInput.cpp"
+#include <string.h>
+#include "UserInput.hpp"
 
 
 class ExecutableCommand: public UserInput { // USE CONST CHAR
@@ -61,6 +57,3 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
 
 
-
-
-#endif /*__EXECUTABLECOMMAND_H__*/

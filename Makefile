@@ -48,10 +48,10 @@ RM = /usr/bin/cmake3 -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke
+CMAKE_SOURCE_DIR = /home/csmajs/rwyat002/assignment-team_robert_kosuke
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke
+CMAKE_BINARY_DIR = /home/csmajs/rwyat002/assignment-team_robert_kosuke
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,9 +126,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke/CMakeFiles /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/rwyat002/assignment-team_robert_kosuke/CMakeFiles /home/csmajs/rwyat002/assignment-team_robert_kosuke/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/rwyat002/assignment-team_robert_kosuke/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

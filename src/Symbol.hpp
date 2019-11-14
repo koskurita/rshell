@@ -1,8 +1,4 @@
-#ifndef __SYMBOLL_H__
-
-#define __SYMBOL_H__
-
-
+#pragma once
 
 #include <iostream>
 
@@ -27,7 +23,7 @@
 #include <sys/wait.h>
 
 #include <unistd.h>
-#include "UserInput.cpp"
+#include "UserInput.hpp"
 
 using namespace std;
 
@@ -57,6 +53,3 @@ class Symbol: public UserInput {
 
 };
 
-
-
-#endif /*__SYMBOL_H__*/

@@ -1,7 +1,4 @@
-#ifndef __LINE_H__
-
-#define __LINE_H__
-
+#pragma once
 #include <iostream>
 
 #include <sstream>
@@ -25,11 +22,13 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <unistd.h>
-#include "UserInput.cpp"
-#include "ExecutableCommand.cpp"
-#include "SemiColon.cpp"
-#include "DoubleAnd.cpp"
-#include "DoubleSlash.cpp"
+#include "UserInput.hpp"
+#include "ExecutableCommand.hpp"
+#include "SemiColon.hpp"
+#include "DoubleAnd.hpp"
+#include "DoubleSlash.hpp"
+
+
 
 
 using namespace std;
@@ -62,4 +61,4 @@ class Line: public UserInput {
 
 
 
-#endif /*__LINE_H__*/
+

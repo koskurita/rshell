@@ -1,8 +1,4 @@
-#ifndef __DOUBLESLASH_HPP__
-
-#define __DOUBLESLASH_HPP__
-
-
+#pragma once
 
 #include <iostream>
 
@@ -27,7 +23,7 @@
 #include <sys/wait.h>
 
 #include <unistd.h>
-#include "Symbol.cpp"
+#include "Symbol.hpp"
 
 
 
@@ -54,4 +50,4 @@ class DoubleSlash:public Symbol{
 
 
 
-#endif /*__DOUBLESLASH_H__*/
+/*__DOUBLESLASH_H__*/

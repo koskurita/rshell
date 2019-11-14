@@ -1,8 +1,4 @@
-#ifndef __DOUBLEAND_H__
-
-#define __DOUBLEAND_H__
-
-
+#pragma once
 
 #include <iostream>
 
@@ -27,7 +23,7 @@
 #include <sys/wait.h>
 
 #include <unistd.h>
-#include "Symbol.cpp"
+#include "Symbol.hpp"
 
 
 class DoubleAnd:public Symbol{
@@ -50,4 +46,4 @@ class DoubleAnd:public Symbol{
 
 
 
-#endif /*__DOUBLEAND_H__*/
+/*__DOUBLEAND_H__*/

@@ -1,4 +1,4 @@
-# Install script for directory: /home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke
+# Install script for directory: /home/csmajs/rwyat002/assignment-team_robert_kosuke
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke/googletest/cmake_install.cmake")
+  include("/home/csmajs/rwyat002/assignment-team_robert_kosuke/googletest/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/csmajs/kkuri005/assignment_1/assignment-team_robert_kosuke/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/csmajs/rwyat002/assignment-team_robert_kosuke/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,6 +1,4 @@
-#ifndef __SEMICOLON_H__
-
-#define __SEMICOLON_H__
+#pragma once
 
 
 
@@ -27,7 +25,7 @@
 #include <sys/wait.h>
 
 #include <unistd.h>
-#include "Symbol.cpp" 
+#include "Symbol.hpp" 
 
 
 class SemiColon: public Symbol{
@@ -44,7 +42,7 @@ class SemiColon: public Symbol{
 
     public:
 
-        SemiColon(const char* s):Symbol(s);
+        SemiColon(const char* s);
 
         bool PerformNext(UserInput * one, UserInput * two);
 
@@ -52,4 +50,4 @@ class SemiColon: public Symbol{
 
 
 
-#endif /*__SEMICOLON_H__*/
+

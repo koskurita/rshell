@@ -1,8 +1,9 @@
+#pragma once
 #include <iostream>
 #include "Line.hpp"
 
 
-
+using namespace std;
     Line::Line(){//default constructor
         ID = 2;
     }
@@ -289,5 +290,4 @@ UserInput* Line::ParseUserInput(string cheese){
 
 }
 
-}
 

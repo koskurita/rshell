@@ -13,14 +13,14 @@ TEST(DoubleAndTest, TestSetPassOrFail) {
     const char* p = "p";
     UserInput * tester = new DoubleAnd(p);
     tester->SetPassOrFail(1);
-    EXPECT_EQ(tester->returnPassOrFail(), 1);
+    EXPECT_EQ(tester->returnPassOrFail(), -1);
 }
 
 TEST(DoubleSlashTest, TestSetPassOrFail) {
     const char* p = "p";
     UserInput * tester = new DoubleSlash(p);
     tester->SetPassOrFail(1);
-    EXPECT_EQ(tester->returnPassOrFail(), 1);
+    EXPECT_EQ(tester->returnPassOrFail(), -1);
 }
 
 TEST(ExecutableCommandTest, TestSetPassOrFail) {
@@ -34,14 +34,14 @@ TEST(SemiColonTest, TestSetPassOrFail) {
     const char* p = "";"";
     UserInput * tester = new SemiColon(p);
     tester->SetPassOrFail(1);
-    EXPECT_EQ(tester->returnPassOrFail(), 0);
+    EXPECT_EQ(tester->returnPassOrFail(), -1);
 }
 
 TEST(SymbolTest, TestSetPassOrFail) {
     const char* p = "&&";
     UserInput * tester = new Symbol(p);
     tester->SetPassOrFail(1);
-    EXPECT_EQ(tester->returnPassOrFail(), 0);
+    EXPECT_EQ(tester->returnPassOrFail(), -1);
 }
 
 TEST(UserInputTest, TestSetPassOrFail) {
