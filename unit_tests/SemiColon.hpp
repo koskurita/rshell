@@ -1,6 +1,4 @@
-#include "UserInput.cpp"
-#include "Symbol.cpp"
-#include "SemiColon.cpp"
+#include "everything.hpp"
 
 
 TEST(SemiColonTest, TestSetPassOrFail) {
