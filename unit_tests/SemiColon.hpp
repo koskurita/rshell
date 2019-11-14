@@ -1,5 +1,5 @@
 #include "everything.hpp"
-
+#include "gtest/gtest.h"
 
 TEST(SemiColonTest, TestSetPassOrFail) {
     UserInput * tester = new Symbol(";");
