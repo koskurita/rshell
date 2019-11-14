@@ -1,6 +1,5 @@
-
 #include "everything.hpp"
-
+#include "gtest/gtest.h"
 
 TEST(UserInputTest, TestSetPassOrFail) {
     UserInput * tester = new DoubleAnd();
