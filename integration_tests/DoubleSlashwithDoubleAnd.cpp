@@ -458,6 +458,7 @@ return true;
 
 UserInput* Line::ParseUserInput(string cheese){
 
+    int end_w_q = 0;
     string s = "";
 
     vector<string> temp_vector;
@@ -469,7 +470,24 @@ UserInput* Line::ParseUserInput(string cheese){
             temp_vector.push_back(s);
 
             s = "";
+            end_w_q = 0;
 
+        }
+        else if(cheese[i] == '"'){
+            i++;
+            while(cheese[i] != '"'){
+                s += cheese[i];
+                i++;
+            }
+            temp_vector.push_back(s);
+            s = "";
+            i++;
+            end_w_q = 1;
+        }
+        
+        else if(cheese[i] == '#'){
+            end_w_q = 0;
+            break;
         }
 
         else if(cheese[i] == '&'){
@@ -519,19 +537,23 @@ UserInput* Line::ParseUserInput(string cheese){
         else{
 
         s+= cheese[i];
-
+        end_w_q = 0;
         }
 
     }
-
-    temp_vector.push_back(s);
+    
+    if(end_w_q == 0){
+        temp_vector.push_back(s);
+    }
 
     
 
 
 /*
     for(unsigned int i = 0; i < temp_vector.size(); i++){
+
         std::cout << temp_vector[i] << std::endl;
+
     }*/
 
 
@@ -554,7 +576,9 @@ UserInput* Line::ParseUserInput(string cheese){
 
 
 /*    for(unsigned int i = 0; i < ggs.size(); i++){
+
         cout << ggs[i] << endl;
+
     }
 */
 
@@ -649,22 +673,36 @@ UserInput* Line::ParseUserInput(string cheese){
                 cout << ggs[i];
                 cout << "test1" << endl;
                 temp[k] = ggs[i];
+
                 i++;
+
                 k++;
+
             }
+
             if(i == ggs.size()){
                 UserInput* new_executable_command = new ExecutableCommand(temp);
+
                 this->Inputs.push_back(new_executable_command);
                 cout << "test2" << endl;
+
                 break;
+
             }
+
             else{
                 cout << "test3" << endl;
+
                 UserInput* new_executable_command = new ExecutableCommand(temp);
+
                 this->Inputs.push_back(new_executable_command);
+
                 UserInput* new_symbol = new Symbol(ggs[i]);
+
                 this->Inputs.push_back(new_symbol);
+
             }
+
     }*/
     cout << new_line->Inputs.size();
 
