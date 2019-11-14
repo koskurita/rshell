@@ -8,14 +8,14 @@ ADD_EXECUTABLE(test
     ../assignment-team_robert_kosuke/unit_tests/DoubleAnd_test.hpp
 ../assignment-team_robert_kosuke/unit_tests/DoubleSlash_test.hpp
 ../assignment-team_robert_kosuke/unit_tests/ExecutableCommand_test.hpp
-../assignment-team_robert_kosuke/unit_tests/Line_test.hpp
-../assignment-team_robert_kosuke/unit_tests/SemiColon_test.hpp
+../assignment-team_robert_kosuke/unit_tests/Line_Test.hpp
+../assignment-team_robert_kosuke/unit_tests/SemiColon.hpp
 ../assignment-team_robert_kosuke/unit_tests/Symbol_test.hpp
 ../assignment-team_robert_kosuke/unit_tests/UserInput_test.hpp
 
 )
 
-ADD_EXECUTABLE(test
+ADD_EXECUTABLE(rshell
     ../assignment-team_robert_kosuke/src/main.cpp
 )
 
