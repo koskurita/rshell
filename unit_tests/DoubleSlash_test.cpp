@@ -2,7 +2,8 @@
 #include "gtest/gtest.h"
 
 TEST(UserInputTest, TestSetPassOrFail) {
-    UserInput * tester = new DoubleSlash();
+    const char* p = 'p';
+    UserInput * tester = new DoubleSlash(p);
     tester->SetPassOrFail(1);
     EXPECT_EQ(tester->returnPassOrFail(), 1);
 }
