@@ -48,7 +48,8 @@ class UserInput{
 
         virtual void doInput() = 0;
 
-        virtual void SetPassOrFail(int oneOrZero) = 0;
+        virtual void SetPassOrFail(int oneOrZero)
+	{passOrFail = oneOrZero;}
 
         virtual bool PerformNext(UserInput* one, UserInput* two)=0;//returns true if the next command will execute, false if it will not
 
@@ -58,7 +59,7 @@ class UserInput{
 
         }
 
-        int returnPassOrFail(){
+     virtual int returnPassOrFail(){
 
             return passOrFail;
 
@@ -71,11 +72,8 @@ class Line: public UserInput {
 
     private:
 
-/*        int ID = 2;*/
-
     vector<UserInput*> Inputs;
 
-    int passOrFail = -1;
 
     public:
 
@@ -93,34 +91,15 @@ class Line: public UserInput {
 
     while (lastElement != -1){
 
-    delete Inputs[lastElement];
+	 delete Inputs[lastElement];
 
-    Inputs.pop_back(); // delete later 
+   	 Inputs.pop_back(); // delete later 
 
-    lastElement--;
+   	 lastElement--;
 
-    }
-
-    
-
-    
+    	}
 
     }
-
-    /*IF we ever put a line in a line then this becomes useful*/
-    
-     void SetPassOrFail(int oneOrZero){
-    
-     this->passOrFail = oneOrZero;
-    
-     }
-    
-    int ReturnPassOrFail(){
-    
-     return this->passOrFail;
-    
-       }
-
 
  bool PerformNext(UserInput *one, UserInput*two){//do not use perform next on a line
 
@@ -152,17 +131,18 @@ UserInput* ParseUserInput(string cheese);
 		}
             }
             else{
-		if(IterInt == Inputs.size() - 1){
-			if(Inputs[IterInt]->returnPassOrFail() != 0)   //if the last executable command's passOrFail has not been set to fail...
-				if(Inputs[IterInt]->returnID() < 100)//and the last thing in the vector IS an executableCommand...
+		if(IterInt == Inputs.size()-1){
+			if(Inputs[IterInt]->returnPassOrFail() != 0){   //if the last executable command's passOrFail has not been set to fail...
+				if(Inputs[IterInt]->returnID() < 100){//and the last thing in the vector IS an executableCommand...
 					Inputs[IterInt]->doInput();  //run doInput.
+				}
+			}
 		}
 
                 IterInt++;//do nothing and skip one because this is a Executable command
             }
 
         }
-
 }
 
 
@@ -175,18 +155,8 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
         char* command[50];  //remove const
 
-        int passOrFail = -1;
-
-/*        int ID = 1;*/
 
     public:
-
-        void SetPassOrFail(int oneOrZero) // this function sets pass or fail to one or zero
-
-    {this->passOrFail = oneOrZero;}
-
-        int ReturnPassOrFail(){return this->passOrFail;} //Returns pass or fail integer*/
-
 
     ExecutableCommand(const char* words[50]){ // constructor
 
@@ -206,7 +176,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
     
 
-        }
+    }
 
 
 
@@ -249,9 +219,12 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         std::cout << "Massive error, fork failed." << endl;
 
         }
-        else if (this->passOrFail == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
+        else if (this->returnPassOrFail() == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
 		if(child == 0) {
-		exit(1);//this ends child
+		    exit(1);//this ends child
+		}
+		else if(child > 0){
+		    waitpid(-1,&child,0);
 		}
         }
 	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){//this exits both child and parent if command[0] = exit
@@ -265,12 +238,12 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
         	cout << endl << "failed to execute " << command[0] << endl; //we may want to delete this later
 
-        	this->passOrFail = 0;      //signals that user input failed. 
+        	this->SetPassOrFail(0);      //signals that user input failed. 
 		exit(1);
         	}
         	else{
 
-        	this->passOrFail = 1;      
+        	this->SetPassOrFail(1);      
 
         	exit(1);
 		}
@@ -289,9 +262,6 @@ class Symbol: public UserInput {
 
         const char* symbol;
 
-/*        int ID = 100;*/
-
-        int passOrFail = -1;
 
     public:
 
@@ -299,6 +269,7 @@ class Symbol: public UserInput {
 
     virtual bool PerformNext(UserInput* one, UserInput* two){
 
+	std::cout << endl << "this is should not get called under the rules of the current code" << endl;
     two->SetPassOrFail(1);
 
     return true;
@@ -326,18 +297,8 @@ class Symbol: public UserInput {
         void doInput(){
 /*do nothing*/
 }
-           void SetPassOrFail(int oneOrZero){//dont use this
-
-        std::cout<< "Symbols dont call oneOrZero";}
-
-
-
-        int ReturnPassOrFail(){//dont use this
-
-    std::cout<< "Symbols dont call ReturnPassOrFail"; return 0;}
 
         
-
 };
 
 class DoubleAnd:public Symbol{
@@ -345,10 +306,7 @@ class DoubleAnd:public Symbol{
     private:
 
     const char* symbol;
-/*
-    int ID;*/
 
-    int passOrFail = -1;
 
  public:   
 
@@ -360,18 +318,17 @@ ID = 103;
 
 bool PerformNext(UserInput * one, UserInput * two){
 
-if (one->returnPassOrFail() == 1){
-/*do nothing*/
+if (one->returnPassOrFail() != 0){
+	/*do nothing*/
 
-return true;
+	return true;
 
 }
 
 else
-
 two->SetPassOrFail(0);
 
-return false;
+	return false;
 
 }
 
@@ -385,9 +342,6 @@ class DoubleSlash:public Symbol{
 
     const char* s;
 
-/*    int ID;*/
-
-    int passOrFail = -1;
 
 public:
 
@@ -399,8 +353,7 @@ ID = 102;
 
 bool PerformNext(UserInput * one, UserInput * two){
 
-if (one->returnPassOrFail() == 1){
-
+if (one->returnPassOrFail() != 0){
 two->SetPassOrFail(0);
 
 return false;
@@ -408,7 +361,7 @@ return false;
 }
 
     else{
-/*do nothing*/
+    
     return true;
 
     }
@@ -424,9 +377,6 @@ class SemiColon: public Symbol{
 
     const char* s;
 
-/*    int ID;*/
-
-    int passOrFail = -1;
 
 public:
 
@@ -438,7 +388,7 @@ ID = 101;
 
 bool PerformNext(UserInput * one, UserInput * two){
 
-if (one->returnPassOrFail() == 1){ 
+if (one->returnPassOrFail() != 0){ 
 /*do nothing*/
 return true;
 
@@ -558,11 +508,11 @@ UserInput* Line::ParseUserInput(string cheese){
 
 
 /*
-    for(unsigned int i = 0; i < temp_vector.size(); i++){
-
-        std::cout << temp_vector[i] << std::endl;
-
-    }*/
+ *     for(unsigned int i = 0; i < temp_vector.size(); i++){
+ *
+ *             std::cout << temp_vector[i] << std::endl;
+ *
+ *                 }*/
 
 
 
@@ -584,11 +534,11 @@ UserInput* Line::ParseUserInput(string cheese){
 
 
 /*    for(unsigned int i = 0; i < ggs.size(); i++){
-
-        cout << ggs[i] << endl;
-
-    }
-*/
+ *
+ *            cout << ggs[i] << endl;
+ *
+ *                }
+ *                */
 
 
     const char* doubleAnd = "&&";
@@ -621,7 +571,7 @@ UserInput* Line::ParseUserInput(string cheese){
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleSlash(ggs[i]);
+            UserInput* new_symbol = new DoubleAnd(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             
@@ -640,7 +590,7 @@ UserInput* Line::ParseUserInput(string cheese){
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleAnd(ggs[i]);
+            UserInput* new_symbol = new DoubleSlash(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             for(int y =0; y < 50;y++){
@@ -684,23 +634,11 @@ UserInput* Line::ParseUserInput(string cheese){
     return new_line;
 
 }
-
-/*int main(){
-    string s = "ls";
-    UserInput * mainLine = new Line();
-    mainLine->ParseUserInput(s);
-    mainLine->doInput();
-  delete mainLine;
-  return 0;
-
-}*/
-
 int main(){
     string myString;
-    
+            cout << "$";
     for (;;){
         UserInput * mainVec = new Line();
-        cout << "$";
         getline(cin,myString);
         if(myString == "exit" || myString == "Exit"){
             return 0;
@@ -709,6 +647,7 @@ int main(){
         mainVec->doInput();
         delete mainVec;
         myString.clear();
+        cout << "$";
     }
 return 0;
 }
