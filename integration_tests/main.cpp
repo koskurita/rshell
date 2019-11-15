@@ -1270,36 +1270,22 @@ UserInput* Line::ParseUserInput(string cheese){
 
 }
 
-int main(){
+int main(int argv, char** argc){
+    string myString = "";
+    cout << "$";
+    for(int i = 1; i < argv; i++) {
+        myString = myString + argc[i];
+	if(i != argv-1){
+        	myString += " ";
+	}
+    }    
 
-    string myString;
 
-            cout << "$";
 
-    for (;;){
-
-        UserInput * mainVec = new Line();
-
-        getline(cin,myString);
-
-        if(myString == "exit" || myString == "Exit"){
-
-            return 0;
-
-        }
-
-        mainVec->ParseUserInput(myString);
-
-        mainVec->doInput();
-
-        delete mainVec;
-
-        myString.clear();
-
-        cout << "$";
-
-    }
-
-return 0;
-
+    UserInput * mainVec = new Line();
+    mainVec->ParseUserInput(myString);
+    mainVec->doInput();
+    delete mainVec;
+    myString.clear();
+    std::cout << std::endl;
 }
