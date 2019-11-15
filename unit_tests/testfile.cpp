@@ -1,6 +1,9 @@
 #include "everything.hpp"
 #include "gtest/gtest.h"
 
+
+
+
 TEST(LineTest, TestSetPassOrFail) {//LineTest
     UserInput * tester = new Line();
     tester->SetPassOrFail(1);//1
@@ -14,6 +17,13 @@ TEST(DoubleAndTest, TestSetPassOrFail) {//DoubleAndTest
     UserInput * tester = new DoubleAnd(p);
     tester->SetPassOrFail(1);//2
     EXPECT_EQ(tester->returnPassOrFail(), 1);
+}
+
+TEST(DoubleAndTest, TestSetPassOrFail) {//DoubleAndTest
+    
+    const char* p = "p";
+    UserInput * tester = new DoubleAnd(p);
+    EXPECT_EQ(tester->ReadID, 103);
 }
 
 TEST(DoubleSlashTest, TestSetPassOrFail){//SlashTest
