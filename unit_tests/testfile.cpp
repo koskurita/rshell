@@ -19,7 +19,7 @@ TEST(DoubleAndTest, TestSetPassOrFail) {//DoubleAndTest
     EXPECT_EQ(tester->returnPassOrFail(), 1);
 }
 
-TEST(DoubleAndIDTest, TestSetPassOrFail) {//DoubleAndTest
+TEST(DoubleAndTest, TestID) {//DoubleAndTest
     
     const char* p = "p";
     UserInput * tester = new DoubleAnd(p);
