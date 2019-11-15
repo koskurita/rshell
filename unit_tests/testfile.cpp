@@ -33,6 +33,13 @@ TEST(DoubleSlashTest, TestSetPassOrFail){//SlashTest
     EXPECT_EQ(tester->returnPassOrFail(), 1);
 }
 
+TEST(DoubleSlashTest, TestID) {//DoubleAndTest
+    
+    const char* p = "p";
+    UserInput * tester = new DoubleSlash(p);
+    EXPECT_EQ(tester->ReadID(), 102);
+}
+
 TEST(DoubleAndTest, TestPerformNextFirstExeFail) {//DOubleAndTest
     const char* arr[50];
     const char* one = "ls";
@@ -103,6 +110,15 @@ TEST(ExecutableCommandTest, TestSetPassOrFail) {
     tester->SetPassOrFail(1);//4
     EXPECT_EQ(tester->returnPassOrFail(), 1);
 }
+TEST(ExecutableCommandTest, TestID) {//DoubleAndTest
+    const char* arr[50];
+    const char* one = "ls";
+    const char* two = NULL;
+    arr[0] = one;
+    arr[1] = two;
+    UserInput * tester = new DoubleAnd(arr);
+    EXPECT_EQ(tester->ReadID(), 1);
+}
 
 TEST(SemiColonTest, TestSetPassOrFail) {
    const char * p = ";";
@@ -110,6 +126,14 @@ TEST(SemiColonTest, TestSetPassOrFail) {
     tester->SetPassOrFail(1);//5
     EXPECT_EQ(tester->returnPassOrFail(), 1);
 }
+
+TEST(SemiColonTest, TestID) {//DoubleAndTest
+    const char* one = "ls";
+    UserInput * tester = new DoubleAnd(one);
+    EXPECT_EQ(tester->ReadID(), 101);
+}
+
+
 
 TEST(SymbolTest, TestSetPassOrFail) {
     const char* p = "&&";
