@@ -24,39 +24,44 @@ ExecutableCommands are everything else.
 
 	Userinput is the base class and it takes the input from the user 
 	and assigns an ID for each line. The ID is use to determine whether 
-	the userinput is asymbol or an executable command.
+	the userinput is a symbol or an executable command, which will be used in line.
 
 **Line**
 
 	Line inherits from UserInput and contains a vector of userinput which  
-	currently contains either symbols or executable_commands.
+	currently contains either symbols or executable_commands. Line also contains the
+	function doInput(), which iterates through the vector and runs the command which 
+	should be run.
 
 **Symbols**
 
-	Symbols are userinputs that are either ";", "||", or "&&" 
-	which all symbolize the end of an executable command. We use Symbols
+	Symbols are userinputs that symbolize the end of an executable command. We use Symbols
 	to determine if we should execute the next ExecutableCommand in our
-	Line using the function "PerformNext"
+	Line using the function "PerformNext".
 
 **SemiColon**
 
-	The semicolon represents the end of an executable command. Whatever
-	Executable command comes after a semicolon will run.
+	The semicolon represents the end of an executable command. It contains a
+	function which checks for the previous and following command to
+	determine Whatever the executable command which comes after a semicolon
+	will run, since there are no condditions attatched to it.
 
 **DoubleSlash**
 
-	The "or" symbol runs the executable command which comes after 
-	it only if the command prior to the symbol fails to run successfully.
+	The "or" symbol contains a function which runs the executable command which comes after 
+	it only if the command prior to the symbol fails to run successfully. If the command 
+	before it runs successfully, the command after does not run.
 
 **DoubleAnd**
 
-	The "and" symbol runs the executable command which comes 
-	after it only if the command prior to the symbol runs successfully.
+	The "and" symbol contains a function which runs the executable command which comes 
+	after it only if the command prior to the symbol runs successfully. If the
+	command prior to it fails then the command after will not run.
 
 **ExecutableCommands**
 
 	Executable commands are vector of char* that store the commands 
-	that are going to be run on the terminal. ExecutableCommands have
+	that are going to be run on hammer. ExecutableCommands have
 	a parameter of const char* vec[50] which is converted into a
 	char* vec[50]
 
