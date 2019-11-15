@@ -116,7 +116,7 @@ TEST(ExecutableCommandTest, TestID) {//DoubleAndTest
     const char* two = NULL;
     arr[0] = one;
     arr[1] = two;
-    UserInput * tester = new DoubleAnd(arr);
+    UserInput * tester = new ExecutableCommand(arr);
     EXPECT_EQ(tester->ReadID(), 1);
 }
 
@@ -129,7 +129,7 @@ TEST(SemiColonTest, TestSetPassOrFail) {
 
 TEST(SemiColonTest, TestID) {//DoubleAndTest
     const char* one = "ls";
-    UserInput * tester = new DoubleAnd(one);
+    UserInput * tester = new SemiColon(one);
     EXPECT_EQ(tester->ReadID(), 101);
 }
 
