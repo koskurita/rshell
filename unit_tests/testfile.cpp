@@ -23,7 +23,7 @@ TEST(DoubleAndTest, TestID) {//DoubleAndTest
     
     const char* p = "p";
     UserInput * tester = new DoubleAnd(p);
-    EXPECT_EQ(tester->ReadID, 103);
+    EXPECT_EQ(tester->ReadID(), 103);
 }
 
 TEST(DoubleSlashTest, TestSetPassOrFail){//SlashTest
