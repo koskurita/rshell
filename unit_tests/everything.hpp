@@ -123,9 +123,7 @@ UserInput* ParseUserInput(string cheese);
 		if(IterInt != 0){
                 	Inputs[IterInt - 1]->doInput();//call doInput on ExecutableCommand Which exists prior to symbol
                 	Inputs[IterInt]->PerformNext(Inputs[IterInt-1],Inputs[IterInt + 1]);//call perform next on the symbol
-            		/*std::cout << endl << endl << endl << Inputs[IterInt -1]->returnID() << " " << Inputs[IterInt -1]->returnPassOrFail() << endl;*/
-			
-		    	IterInt++;
+                	IterInt++;
 		  }//Example ls || -a ; ls
 	    	else {
 		cout << "Error, symbol(&&,||,;) is first element inputted." << endl;
@@ -133,17 +131,18 @@ UserInput* ParseUserInput(string cheese);
 		}
             }
             else{
-		if(IterInt == Inputs.size() - 1){
-			if(Inputs[IterInt]->returnPassOrFail() != 0)   //if the last executable command's passOrFail has not been set to fail...
-				if(Inputs[IterInt]->returnID() < 100)//and the last thing in the vector IS an executableCommand...
+		if(IterInt == Inputs.size()-1){
+			if(Inputs[IterInt]->returnPassOrFail() != 0){   //if the last executable command's passOrFail has not been set to fail...
+				if(Inputs[IterInt]->returnID() < 100){//and the last thing in the vector IS an executableCommand...
 					Inputs[IterInt]->doInput();  //run doInput.
+				}
+			}
 		}
 
                 IterInt++;//do nothing and skip one because this is a Executable command
             }
 
         }
-
 }
 
 
@@ -158,7 +157,6 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
 
     public:
-
 
     ExecutableCommand(const char* words[50]){ // constructor
 
@@ -178,7 +176,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
     
 
-        }
+    }
 
 
 
@@ -223,11 +221,10 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
         }
         else if (this->returnPassOrFail() == 0){ //This is all be to check if This executable has already "failed" due to a '&&' or '||'
 		if(child == 0) {
-		exit(1);//this ends child
+		    exit(1);//this ends child
 		}
 		else if(child > 0){
-		waitpid(-1,&child,0);
-		
+		    waitpid(-1,&child,0);
 		}
         }
 	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){//this exits both child and parent if command[0] = exit
@@ -358,6 +355,7 @@ bool PerformNext(UserInput * one, UserInput * two){
 
 if (one->returnPassOrFail() != 0){
 two->SetPassOrFail(0);
+
 return false;
 
 }
@@ -636,4 +634,3 @@ UserInput* Line::ParseUserInput(string cheese){
     return new_line;
 
 }
-
