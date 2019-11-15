@@ -33,9 +33,11 @@
 *.app
 rshell
 test
+bin
+lib
 
 # CMake Temp Files
 CMakeCache.txt
 CMakeFiles
 cmake_install.cmake
-
+Makefile

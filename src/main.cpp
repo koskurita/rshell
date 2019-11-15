@@ -226,13 +226,15 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 		else if(child > 0){
 		    waitpid(-1,&child,0);
 		}
+       }
+	else if ((command[0][0] == 'e' || command[0][0] == 'E') && command [0][1] == 'x' && command [0][2] == 'i' && command[0][3] == 't'){//this exits both child and parent if command[0] = exit
+
+
+        if(child == 0)
+        	std::cout << "\n now exiting program \n";
+        exit(1);
+
         }
-	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){//this exits both child and parent if command[0] = exit
-
-	std::cout << "\n now exiting program \n";
-
-	exit(1);
-	}
         else if (child == 0) {//aka we are in child
         	if(execvp(command[0], command) < 0){  //this will be (*InputVector[i-1]->words, InputVector[i-1]->words)
 

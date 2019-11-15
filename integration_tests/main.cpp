@@ -421,7 +421,7 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
 
  void doInput(){
-
+	
     	pid_t child;
 
 
@@ -456,10 +456,10 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 
         }
 
-	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){//this exits both child and parent if command[0] = exit
+	else if ((command[0][0] == 'e' || command[0][0] == 'E') && command [0][1] == 'x' && command [0][2] == 'i' && command[0][3] == 't'){//this exits both child and parent if command[0] = exit
 
 
-
+	if(child == 0)
 	std::cout << "\n now exiting program \n";
 
 
@@ -1270,36 +1270,22 @@ UserInput* Line::ParseUserInput(string cheese){
 
 }
 
-int main(){
+int main(int argv, char** argc){
+    string myString = "";
+    cout << endl << "$";
+    for(int i = 1; i < argv; i++) {
+        myString = myString + argc[i];
+	if(i != argv-1){
+        	myString += " ";
+	}
+    }    
+    cout << myString << endl;
 
-    string myString;
 
-            cout << "$";
-
-    for (;;){
-
-        UserInput * mainVec = new Line();
-
-        getline(cin,myString);
-
-        if(myString == "exit" || myString == "Exit"){
-
-            return 0;
-
-        }
-
-        mainVec->ParseUserInput(myString);
-
-        mainVec->doInput();
-
-        delete mainVec;
-
-        myString.clear();
-
-        cout << "$";
-
-    }
-
-return 0;
-
+    UserInput * mainVec = new Line();
+    mainVec->ParseUserInput(myString);
+    mainVec->doInput();
+    delete mainVec;
+    myString.clear();
+    std::cout << std::endl;
 }
