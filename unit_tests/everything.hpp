@@ -266,6 +266,7 @@ class Symbol: public UserInput {
 
     virtual bool PerformNext(UserInput* one, UserInput* two){
 
+	std::cout << endl << "this is should not get called under the rules of the current code" << endl;
     two->SetPassOrFail(1);
 
     return true;
@@ -293,18 +294,8 @@ class Symbol: public UserInput {
         void doInput(){
 /*do nothing*/
 }
-         virtual  void SetPassOrFail(int oneOrZero){//dont use this
-
-        std::cout<< "Symbols dont call setPassOrFail";}
-
-
-
-    virtual int ReturnPassOrFail(){//dont use this
-
-    std::cout<< "Symbols dont call ReturnPassOrFail"; return -1;}
 
         
-
 };
 
 class DoubleAnd:public Symbol{
@@ -325,17 +316,17 @@ ID = 103;
 bool PerformNext(UserInput * one, UserInput * two){
 
 if (one->returnPassOrFail() == 1){
-/*do nothing*/
+	/*do nothing*/
 
-return true;
+	return true;
 
 }
 
 else
-
+std::cout << "in the right spot" << endl;
 two->SetPassOrFail(0);
 
-return false;
+	return false;
 
 }
 
@@ -360,16 +351,16 @@ ID = 102;
 
 bool PerformNext(UserInput * one, UserInput * two){
 
-if (one->returnPassOrFail() == 1){
-
+if (one->returnPassOrFail() != 0){
+std::cout << "in the right spot in doubleslash ";
 two->SetPassOrFail(0);
-
+std::cout << two->returnPassOrFail() << " ";
 return false;
 
 }
 
     else{
-/*do nothing*/
+    
     return true;
 
     }
