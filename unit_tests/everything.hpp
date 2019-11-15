@@ -123,7 +123,9 @@ UserInput* ParseUserInput(string cheese);
 		if(IterInt != 0){
                 	Inputs[IterInt - 1]->doInput();//call doInput on ExecutableCommand Which exists prior to symbol
                 	Inputs[IterInt]->PerformNext(Inputs[IterInt-1],Inputs[IterInt + 1]);//call perform next on the symbol
-                	IterInt++;
+            		/*std::cout << endl << endl << endl << Inputs[IterInt -1]->returnID() << " " << Inputs[IterInt -1]->returnPassOrFail() << endl;*/
+			
+		    	IterInt++;
 		  }//Example ls || -a ; ls
 	    	else {
 		cout << "Error, symbol(&&,||,;) is first element inputted." << endl;
@@ -223,6 +225,10 @@ class ExecutableCommand: public UserInput { // USE CONST CHAR
 		if(child == 0) {
 		exit(1);//this ends child
 		}
+		else if(child > 0){
+		waitpid(-1,&child,0);
+		
+		}
         }
 	else if (this->command[0] == "exit" || this ->command[0] == "Exit"){//this exits both child and parent if command[0] = exit
 
@@ -315,7 +321,7 @@ ID = 103;
 
 bool PerformNext(UserInput * one, UserInput * two){
 
-if (one->returnPassOrFail() == 1){
+if (one->returnPassOrFail() != 0){
 	/*do nothing*/
 
 	return true;
@@ -323,7 +329,6 @@ if (one->returnPassOrFail() == 1){
 }
 
 else
-std::cout << "in the right spot" << endl;
 two->SetPassOrFail(0);
 
 	return false;
@@ -352,9 +357,7 @@ ID = 102;
 bool PerformNext(UserInput * one, UserInput * two){
 
 if (one->returnPassOrFail() != 0){
-std::cout << "in the right spot in doubleslash ";
 two->SetPassOrFail(0);
-std::cout << two->returnPassOrFail() << " ";
 return false;
 
 }
@@ -387,7 +390,7 @@ ID = 101;
 
 bool PerformNext(UserInput * one, UserInput * two){
 
-if (one->returnPassOrFail() == 1){ 
+if (one->returnPassOrFail() != 0){ 
 /*do nothing*/
 return true;
 
@@ -570,7 +573,7 @@ UserInput* Line::ParseUserInput(string cheese){
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleSlash(ggs[i]);
+            UserInput* new_symbol = new DoubleAnd(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             
@@ -589,7 +592,7 @@ UserInput* Line::ParseUserInput(string cheese){
 
             this->Inputs.push_back(new_executable_command);
 
-            UserInput* new_symbol = new DoubleAnd(ggs[i]);
+            UserInput* new_symbol = new DoubleSlash(ggs[i]);
 
             this->Inputs.push_back(new_symbol);
             for(int y =0; y < 50;y++){
