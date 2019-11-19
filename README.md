@@ -14,6 +14,11 @@ is in charge of actually running the inputs. Line stores values in two different
 of classes called ExecutableCommand and Symbols, where Symbols are ";", "&&", and "||" and 
 ExecutableCommands are everything else.
 
+To test code type the following in order
+cmake3 .
+make
+./rshell
+
 # Diagram
 
 ![inheritanceTree](https://github.com/cs100/assignment-team_robert_kosuke/blob/master/images/inheritancetree.png)
