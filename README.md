@@ -15,8 +15,14 @@ of classes called ExecutableCommand and Symbols, where Symbols are ";", "&&", an
 ExecutableCommands are everything else.
 
 To test code type the following in order
+
+
 cmake3 .
+
+
 make
+
+
 ./rshell
 
 # Diagram
